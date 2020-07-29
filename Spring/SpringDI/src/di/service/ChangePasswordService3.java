@@ -1,7 +1,6 @@
 package di.service;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import di.dao.Dao;
@@ -12,8 +11,8 @@ import di.exception.MemberNotFoundException;
 @Component("memberPwSvc1")
 public class ChangePasswordService3 {
 	
-	/* @Autowired */
-	@Resource(name="dao")
+	@Autowired
+	/* @Resource(name="dao") */
 	private Dao dao;
 
 

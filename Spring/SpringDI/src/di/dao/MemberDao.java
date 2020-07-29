@@ -1,5 +1,5 @@
-package di.dao;
 
+package di.dao;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 import di.domain.Member;
 
-@Component
+/*beabn 객체 이름을 dao로 설정*/
+@Component("dao")
 public class MemberDao implements Dao {
 	
 	private static long nextId = 0;

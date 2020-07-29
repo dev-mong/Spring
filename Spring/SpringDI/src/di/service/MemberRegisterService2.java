@@ -11,21 +11,12 @@ public class MemberRegisterService2 {
 	
 	private Dao dao;
 	
-	//메서드 주입 방식 
+	//프로퍼티 방식 - 하위 클래스 타입의 객체를 주입 받을 수 있는 객체 
 	public void setDao(Dao dao) {
 		this.dao = dao;
 	}
 	
 	
-	
-
-	public MemberRegisterService2(Dao dao) {
-		super();
-		this.dao = dao;
-	}
-
-
-
 
 	public void regist(RegisterRequest req) throws AlreadyExistingMemberException {
 		Member member = dao.selectByEmail(req.getEmail());

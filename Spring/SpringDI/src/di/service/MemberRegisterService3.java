@@ -15,7 +15,7 @@ import di.exception.AlreadyExistingMemberException;
 public class MemberRegisterService3 {
 	
 	/* @Autowired */
-	@Resource(name="dao")
+	@Resource(name="dao") 
 	private Dao dao;
 	
 

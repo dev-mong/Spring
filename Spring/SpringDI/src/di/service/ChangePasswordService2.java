@@ -8,7 +8,7 @@ import di.exception.MemberNotFoundException;
 public class ChangePasswordService2 {
 	private Dao dao;
 
-	
+	//프로퍼티 방식 
 	public void setDao(Dao dao) {
 		this.dao = dao;
 	}

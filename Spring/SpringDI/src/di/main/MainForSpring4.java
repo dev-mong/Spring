@@ -10,24 +10,24 @@ public class MainForSpring4 {
 	private static GenericXmlApplicationContext ctx = null;
 
 	public static void main(String[] args) {
-		
-		ctx = new GenericXmlApplicationContext("classpath:appCtx7.xsml");
 
-		MemberRegisterService2 mrService1= ctx.getBean("memberregSvc",MemberRegisterService2.class);
-		
-		MemberRegisterService2 mrService2= ctx.getBean("memberregSvc",MemberRegisterService2.class);
-		
+		ctx = new GenericXmlApplicationContext("classpath:appCtx7.xml");
+
+		MemberRegisterService2 mrService1 = ctx.getBean("memberregSvc", MemberRegisterService2.class);
+		MemberRegisterService2 mrService2 = ctx.getBean("memberregSvc", MemberRegisterService2.class);
+
 		boolean chk1 = mrService1 == mrService2;
-			
-		System.out.println("mrService 1=> mrService2 => "+chk1);
-		
-		ChangePasswordService2 chService = ctx.getBean("memberPwSvc",ChangePasswordService2.class);
 
-		ChangePasswordService2 chService2 = ctx.getBean("memberPwSvc",ChangePasswordService2.class);
-		
-		boolean chk2 = chService == chService2;
-		
-		System.out.println("mrService 1=> mrService2 => "+chk2);
+		System.out.println("mrService1==mrService2 -> " + chk1);
+
+		System.out.println("------------------------------");
+
+		ChangePasswordService2 cpService1 = ctx.getBean("memberPwSvc", ChangePasswordService2.class);
+
+		ChangePasswordService2 cpService2 = ctx.getBean("memberPwSvc", ChangePasswordService2.class);
+
+		boolean chk2 = cpService1 == cpService2;
+		System.out.println("cpService1==cpService2 ->" + chk2);
 
 	}
 

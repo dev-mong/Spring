@@ -18,6 +18,7 @@ public class MainForSpring {
 
 	public static void main(String[] args) {
 		
+		//조립기 객체 생성 
 		ctx = new GenericXmlApplicationContext("classpath:appCtx.xml");
 
 		Scanner reader = new Scanner(System.in);
