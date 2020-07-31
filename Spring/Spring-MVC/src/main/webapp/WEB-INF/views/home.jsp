@@ -1,25 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <html>
 <head>
-	<title>Home</title>
+<title>Home</title>
 </head>
 <body>
-<h1>
-	Spring MVC@
-</h1>
+	<h1>Spring MVC@</h1>
 
-	<ul>	
-		<li><a href="<c:url value="/hello"/>">/hello</a></li>
-		<li><a href="bye">/bye</a></li> <!-- 현재 위치가 절대 경로 이므로 경로 설정을 따로 할 필요 x -->
-		
-		<!-- mvc/login/login -->
-		<li><a href="<c:url value="/login/login"/>">/login/login(Get)</a></li>
-	
+	<ul>
+		<li><a href="<c:url value='/hello'/>">/hello</a></li>
+		<li><a href="bye">/bye</a></li>
+
+		<!-- /mvc/login/login -->
+		<li><a href="<c:url value='/login/login'/>">/login/login(GET)</a></li>
+
+		<li><a href="<c:url value="/search" />">/search</a></li>
+		<li><a href="<c:url value="/search/searchForm" />">/searchForm</a></li>
+
+
+
+		<li><a href="<c:url value="/order/order" />">/order/order</a></li>
+
+		<li><a href="<c:url value="/cookie/makeCookie" />">/cookie/makeCookie</a></li>
+		<li><a href="<c:url value="/cookie/viewCookie" />">/cookie/viewCookie</a></li>
+
+		<li><a href="<c:url value="/header/getHeader" />">/header/getHeader</a></li>
+
+		<li><a href="<c:url value="/report/reportForm" />">/report/reportForm</a></li>
 	</ul>
-	
-	
-	
+
+
 </body>
 </html>
