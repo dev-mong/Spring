@@ -5,6 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
+
+import com.aia.opmvc.member.model.Member;
+
+@Repository
 public class MemberDao {
 
 	// Id check 검색
@@ -38,4 +43,28 @@ public class MemberDao {
 
 		return resultCnt;
 	}
+
+	public int insertMember(Connection conn, Member member) throws SQLException {
+		int resultCnt = 0;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO project.member " + "(uid,upw,uname,uphoto) VALUES (?,?,?,?)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getUid());
+			pstmt.setString(2, member.getUpw());
+			pstmt.setString(3, member.getUname());
+			pstmt.setString(4, member.getUploadPhoto());
+
+			resultCnt = pstmt.executeUpdate();
+
+		} finally {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+		}
+
+		return resultCnt;
+	}
+
 }
