@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.aia.opmvc.jdbc.ConnectionProvider;
 import com.aia.opmvc.member.dao.MemberDao;
 
+@Service
 public class IdCheckService {
 	
 	@Autowired
@@ -15,15 +17,12 @@ public class IdCheckService {
 	
 	public String check(String uid) {
 		
-		
 		String result = "N";
-		
 		
 		Connection conn = null;
 		
 		try {
 			conn = ConnectionProvider.getConnection();
-			
 			int resultCnt = dao.selectById(conn,uid);
 			
 			if(resultCnt<1) {
