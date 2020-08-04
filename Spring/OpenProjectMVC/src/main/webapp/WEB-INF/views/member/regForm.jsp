@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>INDEX</title>
+<title>회원가입</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
+import com.aia.opmvc.member.model.LoginInfo;
 import com.aia.opmvc.member.model.Member;
 
 @Repository
@@ -65,6 +66,40 @@ public class MemberDao {
 		}
 
 		return resultCnt;
+	}
+
+	public LoginInfo selectByIdPw(Connection conn, String uid, String upw) throws SQLException {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		LoginInfo login= null;
+
+		try {
+			String sql = "select * from project.member where uid=? and upw=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			pstmt.setString(2, upw);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				login=new LoginInfo();
+				login.setUid(rs.getString("uid"));
+				login.setUpw(rs.getString("upw"));
+			}
+
+		} finally {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		}
+
+
+		return login;
+
 	}
 
 }
