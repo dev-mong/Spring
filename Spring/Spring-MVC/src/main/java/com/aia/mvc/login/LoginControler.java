@@ -18,8 +18,7 @@ public class LoginControler {
 	@RequestMapping(method = RequestMethod.GET)
 	public String getLoginForm() {
 		
-		return "login/login";
-		// /WEB-INF/views/login/login.jsp
+		return "login/loginForm";
 	}
 	
 	//POST 방식 요청 처리 메서드 
