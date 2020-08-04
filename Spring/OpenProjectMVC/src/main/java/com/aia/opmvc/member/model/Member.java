@@ -8,7 +8,7 @@ public class Member {
 	private String uid;
 	private String upw;
 	private String uname;
-	private MultipartFile  uphoto;
+	private MultipartFile  photo;
 	private String uploadPhoto;
 	public int getIdx() {
 		return idx;
@@ -34,11 +34,11 @@ public class Member {
 	public void setUname(String uname) {
 		this.uname = uname;
 	}
-	public MultipartFile getUphoto() {
-		return uphoto;
+	public MultipartFile getPhoto() {
+		return photo;
 	}
-	public void setUphoto(MultipartFile uphoto) {
-		this.uphoto = uphoto;
+	public void setPhoto(MultipartFile photo) {
+		this.photo = photo;
 	}
 	public String getUploadPhoto() {
 		return uploadPhoto;
@@ -48,9 +48,11 @@ public class Member {
 	}
 	@Override
 	public String toString() {
-		return "Member [idx=" + idx + ", uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", uphoto=" + uphoto
+		return "Member [idx=" + idx + ", uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", photo=" + photo
 				+ ", uploadPhoto=" + uploadPhoto + "]";
 	}
+	
+
 	
 
 

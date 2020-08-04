@@ -19,6 +19,8 @@
 		<h1 class="subtitle">회원 가입</h1>
 		<hr>
 		<h3>
+		
+		${member}
 
 		<c:if test="${memberCnt gt 0}">
 			<div>

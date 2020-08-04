@@ -31,15 +31,10 @@ public class MemberRegController {
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String reg(Model model, HttpServletRequest request,Member member,
-			@RequestParam("photo") MultipartFile file
-			) {
-		
-		
-		member.setUphoto(file);
+	public String reg(Model model, HttpServletRequest request,Member member) {
 		
 		model.addAttribute("memberCnt",service.memberReg(request,member));
-		
+		model.addAttribute("member",member);
 		
 		return "member/reg";
 	}

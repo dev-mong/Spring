@@ -29,16 +29,18 @@ public class MemberRegService {
 			try {
 				conn=ConnectionProvider.getConnection();
 				
-				MultipartFile file = member.getUphoto();
+				MultipartFile file = member.getPhoto();
 				
 				if(file != null && file.getSize()>0 && !file.isEmpty()) {
 					
 					
 					String uri=request.getSession().getServletContext().getInitParameter("memberUphotoPath");
+					System.out.println(uri);
 					String realPath=request.getSession().getServletContext().getRealPath(uri);
+					System.out.println(realPath);
 					String newFileName = System.nanoTime()+"_"+file.getOriginalFilename();
 					File saveFile = new File(realPath, newFileName);
-					file.transferTo(saveFile);
+					file.transferTo(saveFile);	
 					
 					member.setUploadPhoto(newFileName);
 					
