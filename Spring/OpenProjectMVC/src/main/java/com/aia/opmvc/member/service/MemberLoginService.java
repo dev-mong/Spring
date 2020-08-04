@@ -44,14 +44,12 @@ public class MemberLoginService {
 				session.setAttribute("loginInfo", login);
 				
 				//cookie에 저장 -> 아이디 기억
-				if(loginRequest.getCheck().equals("checked")) {
+				if(loginRequest.getCheck() !=null) {
 					
-					message="로그인 성공";
 					response.addCookie(CookieBox.createCookie("uid",login.getUid(),header,60 * 60 * 24 * 365));
 				}
+				message="로그인 성공";
 				
-			}else {
-				message = "로그인 실패";
 			}
 			
 			

@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td><input type="submit" value="로그인"></td>
-					<td><input type="checkbox" name="check" value="${cookie.uid !=null ? 'checked' : '' }" >아이디 기억하기</td>
+					<td><input type="checkbox" name="check" value="checked" ${cookie.uid !=null ? 'checked' : '' } >아이디 기억하기</td>
 				</tr>
 			</table>
 

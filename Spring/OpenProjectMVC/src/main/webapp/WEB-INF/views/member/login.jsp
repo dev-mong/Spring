@@ -17,10 +17,14 @@
 		
 		<c:choose>
 		    <c:when test="${message != null}">
-				${message}
+		    	<br>
+				 ${loginInfo.uid} 님  환영합니다.
 		    </c:when>
 		    <c:otherwise>
-		    	로그인 실패 
+		    	 <script>
+		    	 	alert('로그인을 실패했습니다.');
+		    	 	history.go(-1);
+		    	 </script>
 		    </c:otherwise>
    	 	</c:choose>
 

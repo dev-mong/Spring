@@ -10,7 +10,7 @@
 		
 		
 		<c:if test="${!empty loginInfo}">
-		<li><a href="<c:url value="member/logout.jsp"/>">로그아웃</a></li>
+		<li><a href="<c:url value="/member/logout"/>">로그아웃</a></li>
 		</c:if>
 		
 		<c:if test="${empty loginInfo}">
