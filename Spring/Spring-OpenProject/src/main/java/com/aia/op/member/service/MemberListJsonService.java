@@ -1,5 +1,7 @@
 package com.aia.op.member.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,19 +10,18 @@ import com.aia.op.member.dao.MemberDaoInterface;
 import com.aia.op.member.model.Member;
 
 @Service
-public class MemberViewService {
-	
+public class MemberListJsonService {
 	
 	private MemberDaoInterface dao;
 	
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate template;
 	
-	public Member getMemberInfo(int idx) {
+	public List<Member> getMemberList(){
+			
+		dao=template.getMapper(MemberDaoInterface.class);
 		
-		dao=sessionTemplate.getMapper(MemberDaoInterface.class);
-		
-		return dao.selectByIdx(idx);
+		return dao.selectTotalList();
 		
 	}
 	

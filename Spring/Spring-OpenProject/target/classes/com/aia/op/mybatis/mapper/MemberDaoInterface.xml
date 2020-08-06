@@ -16,8 +16,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</resultMap>
 
+	<select id="selectTotalList" resultMap="resultMember">
+	select * from project.member order by idx desc
+	</select>
 
 
+	<select id="selectTotalListXml"
+			resultType="com.aia.op.member.model.MemberXML"
+	>
+	select * from project.member order by idx desc
+	</select>
+
+	<select id="selectByIdx" 
+			resultType="com.aia.op.member.model.Member"
+	>
+
+	select * from project.member where idx=#{id}
+
+
+	</select>
 
 	<select id="selectByIdpw"
 		resultType="com.aia.op.member.model.Member">
