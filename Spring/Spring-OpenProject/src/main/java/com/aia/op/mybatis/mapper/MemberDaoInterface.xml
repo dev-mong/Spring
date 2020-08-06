@@ -88,7 +88,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
 	<insert id="insertMember"
 		parameterType="com.aia.op.member.model.Member" useGeneratedKeys="true"
 		keyProperty="idx">
@@ -98,7 +97,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (#{uid},#{upw},#{uname},#{uphoto})
 
 	</insert>
+	
+	
+	
+	<select id="selectById" resultType="com.aia.op.member.model.Member"
+	>
+		select * from project.member where idx=#{idx}
+	</select>
 
+	<!-- <![CDATA[IDX<10 AND IDX>1]]>  
+		엘리먼트 <>를 엘리먼트의 시작과 끝으로 인식하지 않도록 처리 
+		Ex) SQL문 전체를 넣어서 처리 
+		<! 
+		[CDATA[
+		INSERT INTO project.member (uid, upw, uname, uphoto)
+		VALUES (#{uid},#{upw},#{uname},#{uphoto})
+		]]
+		>
+	 -->
 
 
 </mapper>

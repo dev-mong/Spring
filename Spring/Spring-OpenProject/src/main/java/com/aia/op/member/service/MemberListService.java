@@ -99,7 +99,7 @@ public class MemberListService {
 			memberList = Collections.emptyList();
 		}
 
-		listView = new MemberListView(totalCnt, currentPageNumber, memberList, MEMBER_CNT_PER_PAGE, startRow,search);
+		listView = new MemberListView(totalCnt, currentPageNumber, memberList, MEMBER_CNT_PER_PAGE, startRow);
 
 		System.out.println(listView);
 

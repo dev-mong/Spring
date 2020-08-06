@@ -9,6 +9,9 @@ public interface MemberDaoInterface {
 	
 	public Member selectByIdpw(String uid, String pw); 
 	
+	//idx 기반으로 검색한 화면의 정보 반환
+	public Member selectById(int idx);
+	
 	public int insertMember(Member member);
 	
 	//전체 게시물의 개수 : 검색 포함 
