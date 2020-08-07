@@ -10,5 +10,11 @@ public interface MemberDao {
 
 	int insertMember(Member member);
 
+	Member selectByIdx(int idx);
+
+	int editMember(Member member);
+
+	int deleteMember(int idx);
+
 
 }
