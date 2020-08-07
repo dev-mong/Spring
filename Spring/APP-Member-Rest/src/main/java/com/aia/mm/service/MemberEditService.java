@@ -28,6 +28,9 @@ public class MemberEditService {
 
 		dao = template.getMapper(MemberDao.class);
 		
+		
+		System.out.println(editRequest);
+		
 		int result = 0;
 
 		// MemberEditRequest -> Member : 이전 파일을 photo에 저장하고 시작

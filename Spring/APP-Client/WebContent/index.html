@@ -28,9 +28,9 @@ div.card>ul>li {
 		IDX<input type="text" name="idx" id="idx" readonly><br> 
 		아이디<input type="text" name="uid" id="euid" readonly><br> 
 		비밀번호<input type="password" name="upw" id="eupw"><br>
-		이름<input type="text"name="uname" id="euname"><br> 
-		사진<input type="file"name="photo" id="ephoto"><br> 
-		현재 사진 <input type="text" name="oldfile" id="oldfile"><br>
+		이름<input type="text" name="uname" id="euname"><br> 
+		사진<input type="file" name="photo" id="ephoto"><br> 
+		현재 사진 <input type="text" name="oldFile" id="oldfile"><br>
 		<input type="submit"value="회원 수정" onclick="editSubmit();"><br>
 	</form>
 
@@ -72,7 +72,7 @@ div.card>ul>li {
 			regFormData.append('uid', $('#euid').val());
 			regFormData.append('upw', $('#eupw').val());
 			regFormData.append('uname', $('#euname').val());
-			regFormData.append('oldfile', $('#oldfile').val());
+			regFormData.append('oldFile', $('#oldfile').val());
 			//파일 첨부 
 			if ($('#ephoto')[0].files[0] != null) {
 				regFormData.append('photo', $('#ephoto')[0].files[0]);
