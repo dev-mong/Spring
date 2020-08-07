@@ -80,6 +80,7 @@ public class Member {
 	}
 
 	// java.sql.Date -> java.util.Date
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	public java.util.Date getToDate() {// ${member.toDate}
 		return new java.util.Date(regdate.getTime());
 	}
