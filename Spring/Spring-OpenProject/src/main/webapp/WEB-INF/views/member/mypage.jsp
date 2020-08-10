@@ -17,9 +17,8 @@
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 	<div>
-	
+	${loginInfo}
 	</div>
-		${member}
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
