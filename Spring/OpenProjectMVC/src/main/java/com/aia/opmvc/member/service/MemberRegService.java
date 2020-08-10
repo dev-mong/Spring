@@ -7,27 +7,36 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aia.opmvc.jdbc.ConnectionProvider;
 import com.aia.opmvc.member.dao.MemberDao;
+import com.aia.opmvc.member.dao.MemberMybatisDao;
 import com.aia.opmvc.member.model.Member;
 
 @Service
 public class MemberRegService {
 
+	//@Autowired
+	//MemberDao dao;
+	
+	MemberMybatisDao dao;
+	
 	@Autowired
-	MemberDao dao;
-
+	SqlSessionTemplate template;
+	
+	
+	
 	public int memberReg(HttpServletRequest request, Member member) {
 		
-		Connection conn = null;
 		int resultCnt = 0;
 		
+		dao=template.getMapper(MemberMybatisDao.class);
+		
 			try {
-				conn=ConnectionProvider.getConnection();
 				
 				MultipartFile file = member.getPhoto();
 				
@@ -51,23 +60,13 @@ public class MemberRegService {
 				}
 				
 				
-				resultCnt = dao.insertMember(conn, member);
+				resultCnt = dao.insertMember(member);
 				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
+			}  catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				if(conn !=null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
+			} 
 			
 			
 			return resultCnt;

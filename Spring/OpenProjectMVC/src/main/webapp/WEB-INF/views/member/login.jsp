@@ -16,7 +16,7 @@
 		
 		
 		<c:choose>
-		    <c:when test="${message != null}">
+		    <c:when test="${not empty message}">
 		    	<br>
 				 ${loginInfo.uid} 님  환영합니다.
 		    </c:when>
