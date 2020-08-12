@@ -1,4 +1,4 @@
-package com.aia.rl.servcie;
+package com.aia.rl.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import com.aia.rl.model.RequestReg;
 
 //등록 서비스
 @Service
-public class RequestService {
+public class RequestRegService {
 
 	RequestDao dao;
 	
