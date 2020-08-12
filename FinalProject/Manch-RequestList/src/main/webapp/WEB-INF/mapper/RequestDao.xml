@@ -6,26 +6,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.aia.rl.dao.RequestDao">
 
-	<!-- <requestMap id="request" type="com.aia.rl.model.RequestReg">
-		<result property="reqidx" column="request_idx" />
+	 <resultMap id="requestList" type="com.aia.rl.model.RequestReg">
+		<result property="reqIdx" column="request_idx" />
 		<result property="reqWriter" column="request_writer"/>
 		<result property="reqTitle" column="request_title"/>
 		<result property="reqHelper" column="request_helper"/>
 		<result property="reqDateTime" column="request_date"/>
 		<result property="reqAddr" column="request_addr"/>
-		<result property="reqContes" column="request_contents"/>
+		<result property="reqContents" column="request_contents"/>
 		<result property="reqLatitude" column="request_latitude"/>
 		<result property="reqLongitude" column="request_longitude"/>
 		<result property="reqCount" column="request_count"/>
 		<result property="reqStatus" column="request_status"/>
-		<result property="reqImg" column="request_img"/>
-	</requestMap> -->
+		<result property="reqImg" column="request_img"/> 
+	</resultMap> 
 	
 	
 	<insert id="insertRequest" parameterType="com.aia.rl.model.RequestReg">
 		insert Mangchi.request_list (request_writer,request_title,request_addr,request_contents,request_latitude,request_longitude)
 <!-- 		values(#{reqWriter}, #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude})
- -->		values(1, #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude})
+ -->		values('테스트용', #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude})
 	</insert>
+	
+	
+	<select id="selectAllList" resultMap="requestList">
+		select * from Mangchi.request_list;
+	</select>
 	
 </mapper>
