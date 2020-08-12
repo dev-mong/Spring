@@ -49,12 +49,11 @@ public class MemberRegController {
 		System.out.println("controller : "+regRequest);
 		
 		//단방향 암호화
-		System.out.println("SHA 암호화 : "+sha256.encrypt(regRequest.getUpw())+ "   길이 : "+ sha256.encrypt(regRequest.getUpw()).length());
-		System.out.println("-----------------------------------------------------------------------------------------------------");
-		System.out.println("AES 암호화 : "+aes256Util.encrypt(regRequest.getUpw())+ "   길이 : "+ aes256Util.encrypt(regRequest.getUpw()).length());
-		System.out.println("-----------------------------------------------------------------------------------------------------");
-		System.out.println("Spring Secutiry 암호화 : "+ passswordEncoder.encode(regRequest.getUpw()) + "  길이: "+ passswordEncoder.encode(regRequest.getUpw()).length());
-		
+//		System.out.println("SHA 암호화 : "+sha256.encrypt(regRequest.getUpw())+ "   길이 : "+ sha256.encrypt(regRequest.getUpw()).length());
+//		System.out.println("-----------------------------------------------------------------------------------------------------");
+//		System.out.println("AES 암호화 : "+aes256Util.encrypt(regRequest.getUpw())+ "   길이 : "+ aes256Util.encrypt(regRequest.getUpw()).length());
+//		System.out.println("-----------------------------------------------------------------------------------------------------");
+//		System.out.println("Spring Secutiry 암호화 : "+ passswordEncoder.encode(regRequest.getUpw()) + "  길이: "+ passswordEncoder.encode(regRequest.getUpw()).length());
 		
 		//model.addAttribute("result", regService.memberReg(regRequest, request));
 		
