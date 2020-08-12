@@ -33,4 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from Mangchi.request_list;
 	</select>
 	
+	
+	<select id="selectIdx" resultMap="requestList">
+		select * from Mangchi.request_list where request_idx=#{idx}
+	</select>
+	
 </mapper>

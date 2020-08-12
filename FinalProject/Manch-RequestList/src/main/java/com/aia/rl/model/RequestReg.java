@@ -26,9 +26,6 @@ public class RequestReg {
 	
 	
 
-
-
-
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, int reqHelper, Date reqDateTime, String reqAddr,
 			String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus, String reqImg) {
 		this.reqIdx = reqIdx;
