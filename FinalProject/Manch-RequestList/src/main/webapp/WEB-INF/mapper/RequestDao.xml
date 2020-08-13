@@ -6,36 +6,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.aia.rl.dao.RequestDao">
 
-	 <resultMap id="requestList" type="com.aia.rl.model.RequestReg">
+	<resultMap id="requestList"
+		type="com.aia.rl.model.RequestReg">
 		<result property="reqIdx" column="request_idx" />
-		<result property="reqWriter" column="request_writer"/>
-		<result property="reqTitle" column="request_title"/>
-		<result property="reqHelper" column="request_helper"/>
-		<result property="reqDateTime" column="request_date"/>
-		<result property="reqAddr" column="request_addr"/>
-		<result property="reqContents" column="request_contents"/>
-		<result property="reqLatitude" column="request_latitude"/>
-		<result property="reqLongitude" column="request_longitude"/>
-		<result property="reqCount" column="request_count"/>
-		<result property="reqStatus" column="request_status"/>
-		<result property="reqImg" column="request_img"/> 
-	</resultMap> 
-	
-	
-	<insert id="insertRequest" parameterType="com.aia.rl.model.RequestReg">
-		insert Mangchi.request_list (request_writer,request_title,request_addr,request_contents,request_latitude,request_longitude)
-<!-- 		values(#{reqWriter}, #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude})
- -->		values('테스트용', #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude})
+		<result property="reqWriter" column="request_writer" />
+		<result property="reqTitle" column="request_title" />
+		<result property="reqHelper" column="request_helper" />
+		<result property="reqDateTime" column="request_date" />
+		<result property="reqAddr" column="request_addr" />
+		<result property="reqContents" column="request_contents" />
+		<result property="reqLatitude" column="request_latitude" />
+		<result property="reqLongitude" column="request_longitude" />
+		<result property="reqCount" column="request_count" />
+		<result property="reqStatus" column="request_status" />
+		<result property="reqImg" column="request_img" />
+	</resultMap>
+
+
+	<insert id="insertRequest"
+		parameterType="com.aia.rl.model.RequestReg">
+		insert Mangchi.request_list (request_writer,request_title,
+		request_helper,request_addr,request_contents,request_latitude,request_longitude,request_img)
+		<!-- values(#{reqWriter}, #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude}) -->
+		values('테스트용',
+		#{reqTitle},#{reqHelper},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude},#{reqImg})
 	</insert>
-	
-	
+
+
 	<select id="selectAllList" resultMap="requestList">
-		select * from Mangchi.request_list;
+		select * from
+		Mangchi.request_list;
 	</select>
-	
-	
+
+
 	<select id="selectIdx" resultMap="requestList">
-		select * from Mangchi.request_list where request_idx=#{idx}
+		select * from
+		Mangchi.request_list where request_idx=#{idx}
 	</select>
-	
+
+	<update id="editRequest"
+		parameterType="com.aia.rl.model.RequestReg">
+		update Mangchi.request_list set
+		request_writer = '테스트용',
+		request_title = #{reqTitle},
+		request_contents = #{reqContents},
+		request_Img = #{reqImg}
+		where request_idx = #{reqIdx}
+	</update>
+
+
+
 </mapper>

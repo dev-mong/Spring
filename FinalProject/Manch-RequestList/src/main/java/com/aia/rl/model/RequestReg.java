@@ -10,7 +10,7 @@ public class RequestReg {
 	private String reqWriter;
 	private String reqTitle;
 	private int reqHelper;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Seoul")
 	private Date reqDateTime;
 	private String reqAddr;
 	private String reqContents;
@@ -23,8 +23,6 @@ public class RequestReg {
 
 	public RequestReg() {
 	}
-	
-	
 
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, int reqHelper, Date reqDateTime, String reqAddr,
 			String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus, String reqImg) {
@@ -42,18 +40,23 @@ public class RequestReg {
 		this.reqImg = reqImg;
 	}
 
-
-
-
-
-
 	public RequestReg(String reqWriter, String reqTitle, String reqAddr, String reqContents, String reqLatitude,
 			String reqLongitude) {
+		
+		  this.reqTitle = reqTitle; this.reqAddr = reqAddr; this.reqContents =
+		  reqContents; this.reqLatitude = reqLatitude; this.reqLongitude =
+		  reqLongitude;
+		 
+		//this(0, reqWriter, reqTitle, 0, null, reqAddr, reqContents, reqLatitude, reqLongitude, 0, 0, null);
+
+	}
+
+	public RequestReg(int reqIdx, String reqTitle, String reqContents, String reqImg, Date reqDateTime) {
+		this.reqIdx = reqIdx;
 		this.reqTitle = reqTitle;
-		this.reqAddr = reqAddr;
 		this.reqContents = reqContents;
-		this.reqLatitude = reqLatitude;
-		this.reqLongitude = reqLongitude;
+		this.reqImg = reqImg;
+		this.reqDateTime = reqDateTime;
 	}
 
 	public int getReqIdx() {
@@ -168,5 +171,4 @@ public class RequestReg {
 				+ ", reqStatus=" + reqStatus + ", reqImg=" + reqImg + ", distance=" + distance + "]";
 	}
 
-	
 }
