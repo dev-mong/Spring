@@ -7,11 +7,29 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- hikari Connection pool 생성 -->
- 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+<!--  	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		p:driverClassName="com.mysql.cj.jdbc.Driver"
 		p:jdbcUrl="jdbc:mysql://aia.cgcmfq7auqmh.ap-northeast-2.rds.amazonaws.com:3306/Mangchi?serverTimezone=UTC"
 		p:username="bit" p:password="bit">
-	</bean>
+	</bean> -->
+	
+	
+	<bean id="hikariConfig" 
+        class="com.zaxxer.hikari.HikariConfig"
+        p:driverClassName="com.mysql.cj.jdbc.Driver"
+        p:jdbcUrl="jdbc:mysql://aia.cgcmfq7auqmh.ap-northeast-2.rds.amazonaws.com/Mangchi?serverTimezone=UTC"
+        p:username="bit"
+        p:password="bit"
+        p:maximumPoolSize="3"
+        p:minimumIdle="3"
+   />
+   
+   <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+      <constructor-arg ref="hikariConfig" />
+   </bean>
+	
+	
+	
 
 <!-- 	sqlSessionFactory 생성 mybatis-spring : sqlSessionFactoryBean :dataSource 
 		설정, mapper 설정 -->
