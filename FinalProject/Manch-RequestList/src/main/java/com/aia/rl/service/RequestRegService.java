@@ -29,8 +29,8 @@ public class RequestRegService {
 		dao=template.getMapper(RequestDao.class);
 		
 		
-		
 		RequestReg requestReg = requestRegReq.toRequestReg();
+		
 		
 		int result =0;
 		try {
@@ -63,7 +63,7 @@ public class RequestRegService {
 			} else {
 				requestReg.setReqImg("defalult.png");
 			}
-		
+			
 			
 			result = dao.insertRequest(requestReg);
 			

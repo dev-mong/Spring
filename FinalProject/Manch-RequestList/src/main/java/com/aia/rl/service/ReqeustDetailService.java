@@ -17,8 +17,8 @@ public class ReqeustDetailService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestReg detailRequest(int idx) {
-
+	public RequestReg requestDetail(int idx) {
+		
 		dao = template.getMapper(RequestDao.class);
 
 		return dao.selectIdx(idx);

@@ -1,6 +1,8 @@
 package com.aia.rl.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +21,7 @@ public class RequestListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<RequestReg> requestList() {
+	public List<RequestReg> requestList(String mLat, String mLon, int mRadius) {
 
 		dao = template.getMapper(RequestDao.class);
 
@@ -43,21 +45,41 @@ public class RequestListService {
 					requestAll.get(i).getReqImg()
 					);
 			
-			double reqLoc = Double.parseDouble(requestAll.get(i).getReqLatitude());
+			double reqLot = Double.parseDouble(requestAll.get(i).getReqLatitude());
 			double reqLon = Double.parseDouble(requestAll.get(i).getReqLongitude());
+			
+			double userLat = Double.parseDouble(mLat);
+			double userLon = Double.parseDouble(mLon);
 
 			LocationDistance locDistance = new LocationDistance();
 
 			// 두 거리 계산 결과 meter로 출력
-			int distance = locDistance.distance(37.5674160717181, 126.966305052144, reqLoc, reqLon);
+			int distance = locDistance.distance(userLat, userLon, reqLot, reqLon);
 			
-			// 사용자가 요청한 거리 만큼 
+			// 사용자가 요청한 거리 만큼
 			int userDist = 2000;
+			
 			if (distance <= userDist) {
 				request.setDistance(distance); //한개의 요청글에 거리를 담는다
 				requestResult.add(request);
 			} 
 		}
+		
+		//거리 리스트 내림차순으로 정렬 - 가까운 순으로 출력 
+		Collections.sort(requestResult, new Comparator<RequestReg>() {
+
+			@Override
+			public int compare(RequestReg r1,RequestReg r2) {
+
+				  if (r1.getDistance()< r2.getDistance()){
+	                    return -1;
+	                } else if (r1.getDistance() > r2.getDistance()) {
+	                    return 1;
+	                }
+	                return 0;
+			}
+		});
+		
 		
 		return requestResult;
 
