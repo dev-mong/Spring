@@ -25,11 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertRequest"
 		parameterType="com.aia.rl.model.RequestReg">
-		insert Mangchi.request_list (request_writer,request_title,
-		request_helper,request_addr,request_contents,request_latitude,request_longitude,request_img)
-		<!-- values(#{reqWriter}, #{reqTitle},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude}) -->
-		values('테스트용',
-		#{reqTitle},#{reqHelper},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude},#{reqImg})
+		insert Mangchi.request_list (request_writer,request_title,request_helper,request_addr,request_contents,request_latitude,request_longitude,request_img)
+		values(#{reqWriter},#{reqTitle},#{reqHelper},#{reqAddr},#{reqContents},#{reqLatitude},#{reqLongitude},#{reqImg})
 	</insert>
 
 
@@ -58,6 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteRequest">
 		delete from Mangchi.request_list where request_idx=#{reqIdx}
 	</delete>
+
+
+	<update id="statusEdit" parameterType="int">
+		update Mangchi.request_list set request_status = #{reqStatus} where request_idx = #{idx}
+	</update>
 
 
 </mapper>
