@@ -1,6 +1,7 @@
 package com.aia.rl.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -10,8 +11,8 @@ public class RequestReg {
 	private String reqWriter;
 	private String reqTitle;
 	private int reqHelper;
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia")
-	private Date reqDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
+	private Timestamp reqDateTime;
 	private String reqAddr;
 	private String reqContents;
 	private String reqLatitude;
@@ -24,8 +25,9 @@ public class RequestReg {
 	public RequestReg() {
 	}
 
-	public RequestReg(int reqIdx, String reqWriter, String reqTitle, int reqHelper, Date reqDateTime, String reqAddr,
-			String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus, String reqImg) {
+	public RequestReg(int reqIdx, String reqWriter, String reqTitle, int reqHelper, Timestamp reqDateTime,
+			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
+			String reqImg) {
 		this.reqIdx = reqIdx;
 		this.reqWriter = reqWriter;
 		this.reqTitle = reqTitle;
@@ -39,19 +41,25 @@ public class RequestReg {
 		this.reqStatus = reqStatus;
 		this.reqImg = reqImg;
 	}
-
+	
+	//등록
 	public RequestReg(String reqWriter, String reqTitle, String reqAddr, String reqContents, String reqLatitude,
 			String reqLongitude) {
-		
-		  this.reqTitle = reqTitle; this.reqAddr = reqAddr; this.reqContents =
-		  reqContents; this.reqLatitude = reqLatitude; this.reqLongitude =
-		  reqLongitude;
-		 
-		//this(0, reqWriter, reqTitle, 0, null, reqAddr, reqContents, reqLatitude, reqLongitude, 0, 0, null);
+
+		this.reqWriter = reqWriter;
+		this.reqTitle = reqTitle;
+		this.reqAddr = reqAddr;
+		this.reqContents = reqContents;
+		this.reqLatitude = reqLatitude;
+		this.reqLongitude = reqLongitude;
+
+		// this(0, reqWriter, reqTitle, 0, null, reqAddr, reqContents, reqLatitude,
+		// reqLongitude, 0, 0, null);
 
 	}
-
-	public RequestReg(int reqIdx, String reqTitle, String reqContents, String reqImg, Date reqDateTime) {
+	
+	//수정
+	public RequestReg(int reqIdx, String reqTitle, String reqContents, String reqImg, Timestamp reqDateTime) {
 		this.reqIdx = reqIdx;
 		this.reqTitle = reqTitle;
 		this.reqContents = reqContents;
@@ -91,11 +99,11 @@ public class RequestReg {
 		this.reqHelper = reqHelper;
 	}
 
-	public Date getReqDateTime() {
+	public Timestamp getReqDateTime() {
 		return reqDateTime;
 	}
 
-	public void setReqDateTime(Date reqDateTime) {
+	public void setReqDateTime(Timestamp reqDateTime) {
 		this.reqDateTime = reqDateTime;
 	}
 
@@ -162,12 +170,7 @@ public class RequestReg {
 	public void setDistance(int distance) {
 		this.distance = distance;
 	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-	public java.util.Date getToDate() {// ${member.toDate}
-		return new java.util.Date(reqDateTime.getTime());
-	}
-	
+
 
 	@Override
 	public String toString() {
