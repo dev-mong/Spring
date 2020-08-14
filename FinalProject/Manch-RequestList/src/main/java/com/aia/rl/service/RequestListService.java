@@ -26,7 +26,12 @@ public class RequestListService {
 		dao = template.getMapper(RequestDao.class);
 
 		List<RequestReg> requestAll = dao.selectAllList(); //전체 리스트 
-		List<RequestReg> requestResult = new ArrayList<RequestReg>(); //계산된 요청글을 담을 리스트
+		
+		List<RequestReg> result = new ArrayList<RequestReg>(); 
+		
+		List<RequestReg> login = new ArrayList<RequestReg>(); //계산된 요청글을 담을 리스트
+		List<RequestReg> nonLogin= new ArrayList<RequestReg>(); //비회원을 담을 리스트
+		
 		RequestReg request = null; // 요청글 한개
 		
 		for (int i = 0; i < requestAll.size(); i++) {
@@ -61,27 +66,27 @@ public class RequestListService {
 			
 			if (distance <= userDist) {
 				request.setDistance(distance); //한개의 요청글에 거리를 담는다
-				requestResult.add(request);
-			} 
+				login.add(request);
+				result = login;
+			}else{ //비회원일 때 
+				request.setDistance(0);
+				nonLogin.add(request);
+				result = nonLogin;
+			}
 		}
 		
 		//거리 리스트 내림차순으로 정렬 - 가까운 순으로 출력 
-		Collections.sort(requestResult, new Comparator<RequestReg>() {
-
-			@Override
-			public int compare(RequestReg r1,RequestReg r2) {
-
-				  if (r1.getDistance()< r2.getDistance()){
-	                    return -1;
-	                } else if (r1.getDistance() > r2.getDistance()) {
-	                    return 1;
-	                }
-	                return 0;
-			}
-		});
+		/*
+		 * Collections.sort(requestResult, new Comparator<RequestReg>() {
+		 * 
+		 * @Override public int compare(RequestReg r1,RequestReg r2) {
+		 * 
+		 * if (r1.getDistance()< r2.getDistance()){ return -1; } else if
+		 * (r1.getDistance() > r2.getDistance()) { return 1; } return 0; } });
+		 */
 		
-		
-		return requestResult;
+		System.out.println(result);
+		return result;
 
 	}
 

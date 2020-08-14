@@ -10,7 +10,7 @@ public class RequestReg {
 	private String reqWriter;
 	private String reqTitle;
 	private int reqHelper;
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia")
 	private Date reqDateTime;
 	private String reqAddr;
 	private String reqContents;
@@ -162,6 +162,12 @@ public class RequestReg {
 	public void setDistance(int distance) {
 		this.distance = distance;
 	}
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	public java.util.Date getToDate() {// ${member.toDate}
+		return new java.util.Date(reqDateTime.getTime());
+	}
+	
 
 	@Override
 	public String toString() {

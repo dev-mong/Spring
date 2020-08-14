@@ -14,10 +14,12 @@ public interface RequestDao {
 
 	//요청 게시글 상세 정보 
 	public RequestReg selectIdx(int idx);
-
 	
 	//요청 게시글 수정
 	public int editRequest(RequestReg requestReg);
+
+	//요청 게시글 삭제
+	public int deleteRequest(int idx);
 	
 	
 	
