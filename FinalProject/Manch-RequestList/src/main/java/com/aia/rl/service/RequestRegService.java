@@ -31,6 +31,8 @@ public class RequestRegService {
 		
 		RequestReg requestReg = requestRegReq.toRequestReg();
 		
+		System.out.println(requestReg);
+		
 		
 		int result =0;
 		try {
@@ -64,7 +66,7 @@ public class RequestRegService {
 				requestReg.setReqImg("defalult.png");
 			}
 			
-			
+		//	System.out.println(requestReg);
 			result = dao.insertRequest(requestReg);
 			
 		} catch (IllegalStateException e) {
