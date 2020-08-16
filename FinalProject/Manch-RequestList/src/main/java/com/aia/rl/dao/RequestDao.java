@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.aia.rl.model.RequestReg;
+import com.aia.rl.review.model.Review;
 
 public interface RequestDao {
 
@@ -25,6 +26,8 @@ public interface RequestDao {
 
 	//요청 글 취소 상태 변경
 	public int statusEdit(@Param("idx") int idx, @Param("reqStatus") int reqStatus);
+
+	public Review selectReview(String writer);
 	
 	
 	

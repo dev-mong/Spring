@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class RequestEdit {
 
 	private int reqIdx;
+	private String reqWriter;
 	private String reqTitle;
 	private String reqContents;
 	private String oldImg;
@@ -17,8 +18,10 @@ public class RequestEdit {
 	public RequestEdit() {
 	}
 
-	public RequestEdit(int reqIdx, String reqTitle, String reqContents, String oldImg, MultipartFile reqImg) {
+	public RequestEdit(int reqIdx, String reqWriter, String reqTitle, String reqContents, String oldImg,
+			MultipartFile reqImg) {
 		this.reqIdx = reqIdx;
+		this.reqWriter = reqWriter;
 		this.reqTitle = reqTitle;
 		this.reqContents = reqContents;
 		this.oldImg = oldImg;
@@ -31,6 +34,14 @@ public class RequestEdit {
 
 	public void setReqIdx(int reqIdx) {
 		this.reqIdx = reqIdx;
+	}
+
+	public String getReqWriter() {
+		return reqWriter;
+	}
+
+	public void setReqWriter(String reqWriter) {
+		this.reqWriter = reqWriter;
 	}
 
 	public String getReqTitle() {
@@ -66,7 +77,9 @@ public class RequestEdit {
 	}
 
 	public RequestReg toRequestReg() {
-		return new RequestReg(reqIdx, reqTitle, reqContents, oldImg.length() > 0 ? oldImg : null, null);
+		// return new RequestReg(reqIdx, reqTitle, reqContents, oldImg.length() > 0 ?
+		// oldImg : null, null);
+		return new RequestReg(reqIdx,reqWriter, reqTitle, reqContents, oldImg.length() > 0 ? oldImg : null);
 	}
 
 }

@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="editRequest"
 		parameterType="com.aia.rl.model.RequestReg">
 		update Mangchi.request_list set
-		request_writer = '테스트용',
+		request_writer = #{reqWriter},
 		request_title = #{reqTitle},
 		request_contents = #{reqContents},
 		request_Img = #{reqImg}

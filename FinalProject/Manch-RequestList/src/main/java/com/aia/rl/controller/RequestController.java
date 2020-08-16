@@ -45,7 +45,9 @@ public class RequestController {
 	
 	@Autowired
 	private RequestStatusService statusService;
+	
 
+	
 	// 요청 게시물 등록
 	@PostMapping
 	public int requestReg(ReqeustRegReq requestRegReq,HttpServletRequest request) {
@@ -60,15 +62,16 @@ public class RequestController {
 			@RequestParam("mLat") String mLat, 
 			@RequestParam("mLon") String mLon,
 			@RequestParam("mRadius") int mRadius) {
-
+		
+		
 		return listService.requestList(mLat, mLon, mRadius);
 	}
 
 	// 요청 글 상세 정보 출력
 	@GetMapping("/{idx}")
-	public RequestReg requestDetail(@PathVariable("idx") int idx) {
+	public RequestReg requestDetail(@PathVariable("idx") int idx,HttpServletRequest request) {
 
-		return detailService.requestDetail(idx);
+		return detailService.requestDetail(idx,request);
 	}
 	
 	// 요청 글 수정
@@ -90,6 +93,7 @@ public class RequestController {
 		
 		return statusService.requestStatusEdit(idx);
 	}
+	
 	
 	
 

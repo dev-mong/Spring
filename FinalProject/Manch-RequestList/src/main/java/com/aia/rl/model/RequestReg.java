@@ -10,7 +10,7 @@ public class RequestReg {
 	private int reqIdx;
 	private String reqWriter;
 	private String reqTitle;
-	private int reqHelper;
+	private String reqHelper;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp reqDateTime;
 	private String reqAddr;
@@ -21,11 +21,11 @@ public class RequestReg {
 	private int reqStatus;
 	private String reqImg;
 	private int distance;
-
+	
 	public RequestReg() {
 	}
 
-	public RequestReg(int reqIdx, String reqWriter, String reqTitle, int reqHelper, Timestamp reqDateTime,
+	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqHelper, Timestamp reqDateTime,
 			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
 			String reqImg) {
 		this.reqIdx = reqIdx;
@@ -59,12 +59,14 @@ public class RequestReg {
 	}
 	
 	//수정
-	public RequestReg(int reqIdx, String reqTitle, String reqContents, String reqImg, Timestamp reqDateTime) {
+//	public RequestReg(int reqIdx, String reqTitle, String reqContents, String reqImg, Timestamp reqDateTime) {
+		public RequestReg(int reqIdx, String reqWriter,String reqTitle, String reqContents, String reqImg) {
 		this.reqIdx = reqIdx;
+		this.reqWriter=reqWriter;
 		this.reqTitle = reqTitle;
 		this.reqContents = reqContents;
 		this.reqImg = reqImg;
-		this.reqDateTime = reqDateTime;
+		//this.reqDateTime = reqDateTime;
 	}
 
 	public int getReqIdx() {
@@ -91,11 +93,11 @@ public class RequestReg {
 		this.reqTitle = reqTitle;
 	}
 
-	public int getReqHelper() {
+	public String getReqHelper() {
 		return reqHelper;
 	}
 
-	public void setReqHelper(int reqHelper) {
+	public void setReqHelper(String reqHelper) {
 		this.reqHelper = reqHelper;
 	}
 
@@ -167,8 +169,8 @@ public class RequestReg {
 		return distance;
 	}
 
-	public void setDistance(int distance) {
-		this.distance = distance;
+	public String getRealPath() {
+		return realPath;
 	}
 
 
@@ -178,6 +180,6 @@ public class RequestReg {
 				+ reqHelper + ", reqDateTime=" + reqDateTime + ", reqAddr=" + reqAddr + ", reqContents=" + reqContents
 				+ ", reqLatitude=" + reqLatitude + ", reqLongitude=" + reqLongitude + ", reqCount=" + reqCount
 				+ ", reqStatus=" + reqStatus + ", reqImg=" + reqImg + ", distance=" + distance + "]";
-	}
 
+	}
 }

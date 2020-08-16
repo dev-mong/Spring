@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aia.rl.review.dao.ReviewDao">
+
+	<resultMap id="review" type="com.aia.rl.review.model.Review">
+		<result column="request_idx" property="reqIdx" />
+		<result column="review_receiver" property="receiver" />
+		<result column="review_writer" property="writer" />
+		<result column="review_text" property="text" />
+		<result column="review_avg" property="avg" />
+	</resultMap>
+	
+	<insert id="insertReview" parameterType="com.aia.rl.review.model.Review">
+		insert Mangchi.review set list_idx=#{reqIdx}, review_receiver=#{receiver}, review_writer=#{writer}, review_avg=#{avg}, review_text=#{text}
+	</insert>
+	
+</mapper>

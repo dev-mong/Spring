@@ -30,6 +30,8 @@ public class ReqeustEditService {
 		int result = 0;
 
 		RequestReg reg = edit.toRequestReg();
+		
+		System.out.println(reg);
 
 		MultipartFile file = edit.getReqImg();
 		
@@ -41,7 +43,9 @@ public class ReqeustEditService {
 				String uri = "/upload";
 				// 시스템의 실제(절대) 경로
 				String realPath = request.getSession().getServletContext().getRealPath(uri);
-
+				
+				System.out.println(realPath);
+				
 				// 저장할 이미지 파일의 새로운 이름 생성
 				String newFileName = System.nanoTime() + "_" + file.getOriginalFilename();
 

@@ -36,6 +36,7 @@ public class ReqeustDeleteService {
 			
 			String deletePath = realPath+"/"+reg.getReqImg();
 			
+			
 			File deleteImg = new File(deletePath);
 			
 			//사진이 있으면 사진 삭제
