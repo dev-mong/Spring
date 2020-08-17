@@ -3,7 +3,9 @@ package com.aia.rl.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.aia.rl.LocationDistance;
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
+import com.aia.rl.model.RequestRegView;
 
 @Service
 public class RequestListService {
@@ -21,13 +24,26 @@ public class RequestListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<RequestReg> requestList(String mLat, String mLon, int mRadius) {
+	public RequestRegView requestList(String mLat, String mLon, int mRadius, String type, int page) {
+	//public List<RequestReg> requestList(String mLat, String mLon, int mRadius, String type, int page) {
 
 		dao = template.getMapper(RequestDao.class);
 
 		List<RequestReg> requestAll = dao.selectAllList(); // 전체 리스트
 
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (type != null && !type.isEmpty()) {
+			map.put("type", type);
+		}
+
+		final int REQUEST_COUNT_PAGE = 4; // 한 페이지 당 표현 할 리스트 수
+		int listTotalCnt = dao.boardTotalCount(map); // 전체 리스트 개수
+		int currentPageNum = page; // 현재 페이지
+		int startRow = 0;
+
 		List<RequestReg> result = new ArrayList<RequestReg>();
+		List<RequestReg> resultPage = new ArrayList<RequestReg>();
+		RequestRegView resultView = null;
 
 		List<RequestReg> login = new ArrayList<RequestReg>(); // 계산된 요청글을 담을 리스트
 		List<RequestReg> nonLogin = new ArrayList<RequestReg>(); // 비회원을 담을 리스트
@@ -82,7 +98,25 @@ public class RequestListService {
 			}
 		});
 
-		return result;
+		if (listTotalCnt > 0) {
+			startRow = (currentPageNum - 1) * REQUEST_COUNT_PAGE;
+			int endRow = startRow + (REQUEST_COUNT_PAGE-1);
+
+			for (int i = startRow; i <= endRow; i++) {
+				resultPage.add(result.get(i));
+			}
+			
+			listTotalCnt = resultPage.size();
+			
+
+		} else {
+			currentPageNum = 0;
+		}
+
+		resultView=new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, resultPage, startRow);
+		System.out.println(resultView);
+
+		return resultView;
 
 	}
 
