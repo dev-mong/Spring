@@ -14,10 +14,10 @@ import com.aia.rl.model.RequestReg;
 @Service
 public class ReqeustDeleteService {
 
-	RequestDao dao;
+	private RequestDao dao;
 	
 	@Autowired
-	SqlSessionTemplate template;
+	private SqlSessionTemplate template;
 	
 	public int reqeustDelete(int idx, HttpServletRequest request) {
 		

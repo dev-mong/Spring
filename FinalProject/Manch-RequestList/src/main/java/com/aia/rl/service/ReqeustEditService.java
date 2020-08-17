@@ -17,10 +17,10 @@ import com.aia.rl.model.RequestReg;
 @Service
 public class ReqeustEditService {
 
-	RequestDao dao;
+	private RequestDao dao;
 
 	@Autowired
-	SqlSessionTemplate template;
+	private SqlSessionTemplate template;
 
 	public int requestEdit(RequestEdit edit, HttpServletRequest request) {
 		

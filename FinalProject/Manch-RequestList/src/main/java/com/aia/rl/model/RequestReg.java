@@ -169,8 +169,8 @@ public class RequestReg {
 		return distance;
 	}
 
-	public String getRealPath() {
-		return realPath;
+	public int setDistance(int distance) {
+		return this.distance = distance;
 	}
 
 

@@ -19,10 +19,10 @@ import com.aia.rl.model.RequestReg;
 @Service
 public class RequestRegService {
 
-	RequestDao dao;
+	private RequestDao dao;
 	
 	@Autowired
-	SqlSessionTemplate template;
+	private SqlSessionTemplate template;
 
 	public int requestReg(ReqeustRegReq requestRegReq, HttpServletRequest request) {
 

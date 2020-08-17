@@ -27,7 +27,6 @@ public interface RequestDao {
 	//요청 글 취소 상태 변경
 	public int statusEdit(@Param("idx") int idx, @Param("reqStatus") int reqStatus);
 
-	public Review selectReview(String writer);
 	
 	
 	

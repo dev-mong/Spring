@@ -17,4 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert Mangchi.review set list_idx=#{reqIdx}, review_receiver=#{receiver}, review_writer=#{writer}, review_avg=#{avg}, review_text=#{text}
 	</insert>
 	
+	<select id="selectReview" resultMap="review">
+		select * from Mangchi.review where review_writer=#{nick};
+	</select>
+	
+	
 </mapper>

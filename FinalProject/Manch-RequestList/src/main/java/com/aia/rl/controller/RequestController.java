@@ -1,10 +1,19 @@
 package com.aia.rl.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +21,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aia.rl.model.ReqeustRegReq;
 import com.aia.rl.model.RequestEdit;
 import com.aia.rl.model.RequestReg;
+import com.aia.rl.review.service.ReviewCheck;
 import com.aia.rl.service.ReqeustDeleteService;
 import com.aia.rl.service.ReqeustDetailService;
 import com.aia.rl.service.ReqeustEditService;
@@ -93,8 +104,4 @@ public class RequestController {
 		
 		return statusService.requestStatusEdit(idx);
 	}
-	
-	
-	
-
 }
