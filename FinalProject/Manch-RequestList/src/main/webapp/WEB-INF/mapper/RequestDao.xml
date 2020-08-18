@@ -37,8 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<select id="boardTotalCount" resultType="int"
-		parameterType="map">
+	<select id="boardTotalCount" resultType="int">
 		select count(*) from Mangchi.request_list
 	</select>
 

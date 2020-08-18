@@ -24,22 +24,20 @@ public class RequestListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestRegView requestList(String mLat, String mLon, int mRadius, String type, int page) {
-	//public List<RequestReg> requestList(String mLat, String mLon, int mRadius, String type, int page) {
+	public RequestRegView requestList(String mLat, String mLon, int mRadius, String listType, int page, String search, String searchType) {
+		// public List<RequestReg> requestList(String mLat, String mLon, int mRadius,
+		// String type, int page) {
 
 		dao = template.getMapper(RequestDao.class);
 
 		List<RequestReg> requestAll = dao.selectAllList(); // 전체 리스트
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (type != null && !type.isEmpty()) {
-			map.put("type", type);
-		}
 
 		final int REQUEST_COUNT_PAGE = 4; // 한 페이지 당 표현 할 리스트 수
-		int listTotalCnt = dao.boardTotalCount(map); // 전체 리스트 개수
+		int listTotalCnt = dao.boardTotalCount(); // 전체 리스트 개수
 		int currentPageNum = page; // 현재 페이지
-		int startRow = 0;
+		int startRow = 0; //시작행
+		int endRow = 0;  //종료행 
 
 		List<RequestReg> result = new ArrayList<RequestReg>();
 		List<RequestReg> resultPage = new ArrayList<RequestReg>();
@@ -52,13 +50,18 @@ public class RequestListService {
 
 		for (int i = 0; i < requestAll.size(); i++) {
 
-			request = new RequestReg(requestAll.get(i).getReqIdx(), requestAll.get(i).getReqWriter(),
-					requestAll.get(i).getReqTitle(), requestAll.get(i).getReqHelper(),
-					requestAll.get(i).getReqDateTime(), requestAll.get(i).getReqAddr(),
-					requestAll.get(i).getReqContents(), requestAll.get(i).getReqLatitude(),
-					requestAll.get(i).getReqLongitude(), requestAll.get(i).getReqCount(),
-					requestAll.get(i).getReqStatus(), requestAll.get(i).getReqImg());
-
+			
+			  request = new RequestReg(requestAll.get(i).getReqIdx(),
+			  requestAll.get(i).getReqWriter(), requestAll.get(i).getReqTitle(),
+			  requestAll.get(i).getReqHelper(), requestAll.get(i).getReqDateTime(),
+			  requestAll.get(i).getReqAddr(), requestAll.get(i).getReqContents(),
+			  requestAll.get(i).getReqLatitude(), requestAll.get(i).getReqLongitude(),
+			  requestAll.get(i).getReqCount(), requestAll.get(i).getReqStatus(),
+			  requestAll.get(i).getReqImg());
+			 
+			
+			request = new RequestReg();
+			
 			double reqLot = Double.parseDouble(requestAll.get(i).getReqLatitude());
 			double reqLon = Double.parseDouble(requestAll.get(i).getReqLongitude());
 
@@ -77,44 +80,55 @@ public class RequestListService {
 				request.setDistance(distance); // 한개의 요청글에 거리를 담는다
 				login.add(request);
 				result = login;
+				listTotalCnt = result.size();	
 			} else { // 비회원일 때
 				nonLogin.add(request);
 				result = nonLogin;
 			}
 		}
-
-		// 거리 리스트 내림차순으로 정렬 - 가까운 순으로 출력
-		Collections.sort(result, new Comparator<RequestReg>() {
-
-			@Override
-			public int compare(RequestReg r1, RequestReg r2) {
-
-				if (r1.getDistance() < r2.getDistance()) {
-					return -1;
-				} else if (r1.getDistance() > r2.getDistance()) {
-					return 1;
+		
+		
+		System.out.println(result);
+		
+		if(listType.equals("distance")){
+			// 거리 리스트 내림차순으로 정렬 - 가까운 순으로 출력
+			Collections.sort(result, new Comparator<RequestReg>() {
+	
+				@Override
+				public int compare(RequestReg r1, RequestReg r2) {
+	
+					if (r1.getDistance() < r2.getDistance()) {
+						return -1;
+					} else if (r1.getDistance() > r2.getDistance()) {
+						return 1;
+					}
+					return 0;
 				}
-				return 0;
-			}
-		});
-
+			});
+		} 
+		
+		
+		
 		if (listTotalCnt > 0) {
+			
 			startRow = (currentPageNum - 1) * REQUEST_COUNT_PAGE;
-			int endRow = startRow + (REQUEST_COUNT_PAGE-1);
+
+			
+			endRow = startRow + (REQUEST_COUNT_PAGE - 1);
+			
+			if (endRow > listTotalCnt) { //마지막 행이 전체 리스트 개수 보다 클 때 비교 
+				endRow = listTotalCnt-1;
+			}
 
 			for (int i = startRow; i <= endRow; i++) {
 				resultPage.add(result.get(i));
 			}
-			
-			listTotalCnt = resultPage.size();
-			
 
 		} else {
 			currentPageNum = 0;
 		}
 
-		resultView=new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, resultPage, startRow);
-		System.out.println(resultView);
+		resultView = new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, resultPage, startRow);
 
 		return resultView;
 

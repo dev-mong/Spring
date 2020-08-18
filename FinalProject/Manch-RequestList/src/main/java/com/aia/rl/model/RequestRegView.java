@@ -21,10 +21,10 @@ public class RequestRegView {
 
 	// 게시물의 시작 행
 	private int startRow;
+	
 
 	public RequestRegView(int listTotalCnt, int requestCountPage, int currentPageNum, List<RequestReg> requestReg,
 			int startRow) {
-		super();
 		this.listTotalCnt = listTotalCnt;
 		this.requestCountPage = requestCountPage;
 		this.currentPageNum = currentPageNum;

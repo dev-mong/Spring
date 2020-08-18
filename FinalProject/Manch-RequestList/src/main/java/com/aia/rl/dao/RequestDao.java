@@ -44,7 +44,7 @@ public interface RequestDao {
 	public List<RequestReg> selectRequestList(Map<String, Object> searchMap);
 
 	// 전체 게시물 타입 별로 리스트 
-	public int boardTotalCount(Map<String, Object> map);
+	public int boardTotalCount();
 
 
 	

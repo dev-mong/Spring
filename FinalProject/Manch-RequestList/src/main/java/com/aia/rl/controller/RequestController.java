@@ -1,7 +1,5 @@
 package com.aia.rl.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,9 +66,16 @@ public class RequestController {
 			@RequestParam("mLon") String mLon,
 			@RequestParam("mRadius") int mRadius,
 			@RequestParam("type") String type,
-			@RequestParam("page") int page) {
+			@RequestParam("page") int page,
+			
+			@RequestParam("search") String search,
+			@RequestParam("searchType") String searchType
+			
+			) {
+			
 		
-		return listService.requestList(mLat, mLon, mRadius,type,page);
+		//return listService.requestList(mLat, mLon, mRadius,type,page);
+		return listService.requestList(mLat, mLon, mRadius,type,page,search,searchType);
 	}
 
 	// 요청 글 상세 정보 출력
