@@ -1,8 +1,5 @@
 package com.aia.rl.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aia.rl.LocationDistance;
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
 import com.aia.rl.model.RequestRegView;
@@ -82,12 +78,17 @@ public class RequestListService {
 				
 				//검색어가 있을 때 전체 리스트 검색 
 				if(searchText !=null && !searchText.isEmpty()) {
+					result = dao.searchDistance(distanceMap,searchMap);
+					listTotalCnt = result.size();
+					
 				}
 				
 			} else if (type.equals("date")) { // 날짜 순 출력
-				result = dao.loginDateAll(distanceMap); // 회원 날짜순 게시물 출력
+				result = dao.loginDateAll(distanceMap,searchMap); // 회원 날짜순 게시물 출력
 				
 				if(searchText !=null && !searchText.isEmpty()) {
+					result = dao.searchDate(distanceMap,searchMap);
+					listTotalCnt = result.size();
 				}
 				
 				

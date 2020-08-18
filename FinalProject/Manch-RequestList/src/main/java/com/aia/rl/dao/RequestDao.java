@@ -62,10 +62,16 @@ public interface RequestDao {
 	public List<RequestReg> loginDistanceAll(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
 	
 	//로그인 한 사용자 최신 순으로 리스트 출력
-	public List<RequestReg> loginDateAll(Map<String, Object> distanceMap);
+	public List<RequestReg> loginDateAll(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
 	
 	//거리 계산 된 전체 게시물 개수 
 	public int loginTotalCount();
+
+	//거리순으로 검색
+	public List<RequestReg> searchDistance(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
+
+	//시간순으로 검색
+	public List<RequestReg> searchDate(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
 
 
 	

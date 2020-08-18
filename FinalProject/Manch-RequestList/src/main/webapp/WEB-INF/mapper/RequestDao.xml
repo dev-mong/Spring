@@ -61,13 +61,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원 날짜 순으로 출력 -->
 	<select id="loginDateAll" parameterType="map" resultMap="requestList">
 		<![CDATA[SELECT *,
-		(6371*acos(cos(radians(#{mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
-		-radians(#{mLon}))+sin(radians(#{mLat}))*sin(radians(request_latitude))))
+		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
 		AS distance
 		FROM Mangchi.request_list
-		HAVING distance < #{mRadius}
+		HAVING distance < #{distanceMap.mRadius}
 		ORDER BY request_date
-		limit 0,4]]>
+		limit #{searchMap.startRow}, #{searchMap.count}]]>
 	</select>
 	
 
@@ -113,6 +113,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="whereName">
 		or request_writer like concat('%',#{search},'%')
 	</sql>
+
+
+
+	<!-- 회원 거리 순으로 출력 -->
+	<select id="searchDistance" parameterType="map" resultMap="requestList">
+		SELECT *,
+		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
+		AS distance
+		FROM Mangchi.request_list
+		
+		<where>
+			<if test="searchMap.type != null">
+				<if test="searchMap.type == 'title'">
+					or request_title like concat('%',#{searchMap.search},'%')
+				</if>
+				<if test="searchMap.type == 'name'">
+					or request_writer like concat('%',#{searchMap.search},'%')
+				</if>
+			</if>
+		</where>
+		
+		
+		<![CDATA[
+		HAVING distance < #{distanceMap.mRadius}
+		ORDER BY distance
+		limit #{searchMap.startRow}, #{searchMap.count}]]>
+	</select>
+	
+	<!-- 회원 날짜 순으로 출력 -->
+	<select id="searchDate" parameterType="map" resultMap="requestList">
+		SELECT *,
+		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
+		AS distance
+		FROM Mangchi.request_list
+		
+		
+		<where>
+			<if test="searchMap.type != null">
+				<if test="searchMap.type == 'title'">
+					or request_title like concat('%',#{searchMap.search},'%')
+				</if>
+				<if test="searchMap.type == 'name'">
+					or request_writer like concat('%',#{searchMap.search},'%')
+				</if>
+			</if>
+		</where>
+		
+		<![CDATA[
+		HAVING distance < #{distanceMap.mRadius}
+		ORDER BY request_date
+		limit #{searchMap.startRow}, #{searchMap.count}]]>
+	</select>
+
+
+
+
 
 
 
