@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 검색 한 전체 게시물 리스트 -->
-	<select id="selectRequestList" parameterType="map"
+	<!-- <select id="selectRequestList" parameterType="map"
 		resultMap="requestList">
 
 		select * from Mangchi.request_list
@@ -75,6 +75,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{startRow}, #{count}
 
 	</select> 
+	 -->
+	
+	<select id="selectRequestList" parameterType="map"
+		resultMap="requestList">
+
+		select * from Mangchi.request_list
+		<where>
+			<if test="type != null">
+				<if test="type == 'title'">
+					<include refid="wheretitle" />
+				</if>
+				<if test="type == 'name'">
+					<include refid="whereName" />
+				</if>
+			</if>
+		</where>
+	</select> 
+	
 	
 
 	<sql id="wheretitle">
@@ -119,11 +137,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
-	<select id="selectSearch" resultMap="requestList"
+<!-- 	<select id="selectSearch" resultMap="requestList"
 		parameterType="String">
 		select * from Mangchi.request_list where request_title
 		like concat('%',#{search},'%')
-	</select>
+	</select> -->
 
 
 

@@ -73,9 +73,9 @@ public class RequestController {
 			@RequestParam("searchType") String searchType
 			) {
 		
-		System.out.println(searchText+ " "+searchType );
+		System.out.println("검색 데이터 컨트롤러 >>>"+searchText+ " "+searchType );
 		
-		return listService.requestList(mLat, mLon, mRadius,type,page);
+		return listService.requestList(mLat, mLon, mRadius,type,page,searchText,searchType);
 	}
 
 	// 요청 글 상세 정보 출력

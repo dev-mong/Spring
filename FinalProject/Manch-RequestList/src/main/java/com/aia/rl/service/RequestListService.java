@@ -24,20 +24,42 @@ public class RequestListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestRegView requestList(String mLat, String mLon, int mRadius, String type, int page) {
+	public RequestRegView requestList(String mLat, String mLon, int mRadius, String type, int page, String searchText, String searchType) {
 		// public List<RequestReg> requestList(String mLat, String mLon, int mRadius,
 		// String type, int page) {
 
 		dao = template.getMapper(RequestDao.class);
-
-		List<RequestReg> requestAll = dao.selectAllList(); // 전체 리스트
-
 
 		final int REQUEST_COUNT_PAGE = 4; // 한 페이지 당 표현 할 리스트 수
 		int listTotalCnt = dao.boardTotalCount(); // 전체 리스트 개수
 		int currentPageNum = page; // 현재 페이지
 		int startRow = 0; //시작행
 		int endRow = 0;  //종료행 
+		
+		List<RequestReg> requestAll = dao.selectAllList(); // 전체 리스트
+		
+		
+		//검색 조건 
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		if(searchType !=null && !searchType.isEmpty()) {
+			searchMap.put("type",searchType);
+		}
+		if(searchText !=null && !searchText.isEmpty()) {
+			searchMap.put("search",searchText);
+		}
+		
+		
+		//검색어가 있을 때 전체 리스트 검색 
+		if(searchText !=null && !searchText.isEmpty()) {
+			requestAll = dao.selectRequestList(searchMap);
+			listTotalCnt = dao.totalCount(searchMap);
+		}
+		
+		
+		System.out.println(requestAll);
+		System.out.println(listTotalCnt);
+
+
 
 		List<RequestReg> result = new ArrayList<RequestReg>();
 		List<RequestReg> resultPage = new ArrayList<RequestReg>();
