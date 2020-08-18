@@ -51,6 +51,11 @@ public class RequestSearchServcie {
 			
 			requestReg = dao.selectRequestList(searchMap);
 			
+			
+			
+			
+			
+			
 		} else {
 			currentPageNum = 0;
 			requestReg = Collections.emptyList();

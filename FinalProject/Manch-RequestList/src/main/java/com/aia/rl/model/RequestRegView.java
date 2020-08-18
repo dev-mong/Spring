@@ -94,6 +94,15 @@ public class RequestRegView {
 		this.startRow = startRow;
 	}
 
+	@Override
+	public String toString() {
+		return "RequestRegView [listTotalCnt=" + listTotalCnt + ", pageTotalCount=" + pageTotalCount
+				+ ", requestCountPage=" + requestCountPage + ", currentPageNum=" + currentPageNum + ", requestReg="
+				+ requestReg + ", startRow=" + startRow + "]";
+	}
+
+	
+	
 
 
 }

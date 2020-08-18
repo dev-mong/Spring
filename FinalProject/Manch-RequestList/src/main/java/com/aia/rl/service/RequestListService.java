@@ -24,7 +24,7 @@ public class RequestListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestRegView requestList(String mLat, String mLon, int mRadius, String listType, int page, String search, String searchType) {
+	public RequestRegView requestList(String mLat, String mLon, int mRadius, String type, int page) {
 		// public List<RequestReg> requestList(String mLat, String mLon, int mRadius,
 		// String type, int page) {
 
@@ -51,16 +51,13 @@ public class RequestListService {
 		for (int i = 0; i < requestAll.size(); i++) {
 
 			
-			  request = new RequestReg(requestAll.get(i).getReqIdx(),
-			  requestAll.get(i).getReqWriter(), requestAll.get(i).getReqTitle(),
-			  requestAll.get(i).getReqHelper(), requestAll.get(i).getReqDateTime(),
-			  requestAll.get(i).getReqAddr(), requestAll.get(i).getReqContents(),
-			  requestAll.get(i).getReqLatitude(), requestAll.get(i).getReqLongitude(),
-			  requestAll.get(i).getReqCount(), requestAll.get(i).getReqStatus(),
-			  requestAll.get(i).getReqImg());
+			request = new RequestReg(requestAll.get(i).getReqIdx(), requestAll.get(i).getReqWriter(),
+					requestAll.get(i).getReqTitle(), requestAll.get(i).getReqHelper(),
+					requestAll.get(i).getReqDateTime(), requestAll.get(i).getReqAddr(),
+					requestAll.get(i).getReqContents(), requestAll.get(i).getReqLatitude(),
+					requestAll.get(i).getReqLongitude(), requestAll.get(i).getReqCount(),
+					requestAll.get(i).getReqStatus(), requestAll.get(i).getReqImg());
 			 
-			
-			request = new RequestReg();
 			
 			double reqLot = Double.parseDouble(requestAll.get(i).getReqLatitude());
 			double reqLon = Double.parseDouble(requestAll.get(i).getReqLongitude());
@@ -88,9 +85,9 @@ public class RequestListService {
 		}
 		
 		
-		System.out.println(result);
 		
-		if(listType.equals("distance")){
+		
+		if(type.equals("distance")){
 			// 거리 리스트 내림차순으로 정렬 - 가까운 순으로 출력
 			Collections.sort(result, new Comparator<RequestReg>() {
 	

@@ -74,8 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		limit #{startRow}, #{count}
 
-	</select>
-
+	</select> 
+	
 
 	<sql id="wheretitle">
 		or request_title like concat('%',#{search},'%')
