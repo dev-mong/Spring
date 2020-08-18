@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reqImg" column="request_img" />
 	</resultMap>
 
-
+	<!-- 게시글 등록 -->
 	<insert id="insertRequest"
 		parameterType="com.aia.rl.model.RequestReg">
 		insert Mangchi.request_list
@@ -31,18 +31,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 
-	<select id="selectAllList" resultMap="requestList">
+
+
+	<!-- 비회원 게시글 출력 -->
+	<select id="selectAllList" resultMap="requestList" parameterType="map">
 		select * from
+		Mangchi.request_list limit #{startRow}, #{count}
+	</select> 
+	
+	<!-- 비회원 전체 게시물 수 -->
+	<select id="allTotalCount" resultType="int">
+		select count(*) from
 		Mangchi.request_list
 	</select>
 
-
-	<select id="boardTotalCount" resultType="int">
-		select count(*) from Mangchi.request_list
+	
+	<!-- 회원 거리 순으로 출력 -->
+	<select id="loginDistanceAll" parameterType="map" resultMap="requestList">
+		<![CDATA[SELECT *,
+		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
+		AS distance
+		FROM Mangchi.request_list
+		HAVING distance < #{distanceMap.mRadius}
+		ORDER BY distance
+		limit #{searchMap.startRow}, #{searchMap.count}]]>
 	</select>
+	
+	<!-- 회원 날짜 순으로 출력 -->
+	<select id="loginDateAll" parameterType="map" resultMap="requestList">
+		<![CDATA[SELECT *,
+		(6371*acos(cos(radians(#{mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{mLon}))+sin(radians(#{mLat}))*sin(radians(request_latitude))))
+		AS distance
+		FROM Mangchi.request_list
+		HAVING distance < #{mRadius}
+		ORDER BY request_date
+		limit 0,4]]>
+	</select>
+	
 
 
-
+	<!-- 검색어가 있을 떄 전체 게시물 수  -->
 	<select id="totalCount" resultType="int" parameterType="map">
 		select count(*) from Mangchi.request_list
 		<where>
@@ -57,26 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<!-- 검색 한 전체 게시물 리스트 -->
-	<!-- <select id="selectRequestList" parameterType="map"
-		resultMap="requestList">
 
-		select * from Mangchi.request_list
-		<where>
-			<if test="type != null">
-				<if test="type == 'title'">
-					<include refid="wheretitle" />
-				</if>
-				<if test="type == 'name'">
-					<include refid="whereName" />
-				</if>
-			</if>
-		</where>
-		limit #{startRow}, #{count}
-
-	</select> 
-	 -->
-	
 	<select id="selectRequestList" parameterType="map"
 		resultMap="requestList">
 
@@ -91,9 +102,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>
 			</if>
 		</where>
-	</select> 
-	
-	
+		limit #{startRow}, #{count}
+	</select>
+
 
 	<sql id="wheretitle">
 		or request_title like concat('%',#{search},'%')
@@ -136,12 +147,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		request_idx = #{idx}
 	</update>
 
-
-<!-- 	<select id="selectSearch" resultMap="requestList"
-		parameterType="String">
-		select * from Mangchi.request_list where request_title
-		like concat('%',#{search},'%')
-	</select> -->
 
 
 

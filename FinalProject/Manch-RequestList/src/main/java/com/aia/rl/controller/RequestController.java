@@ -74,6 +74,7 @@ public class RequestController {
 			) {
 		
 		System.out.println("검색 데이터 컨트롤러 >>>"+searchText+ " "+searchType );
+		System.out.println("컨트롤러 출력 순서 " +type);
 		
 		return listService.requestList(mLat, mLon, mRadius,type,page,searchText,searchType);
 	}

@@ -36,24 +36,39 @@ public interface RequestDao {
 
 	
 	
-	
-	
-	
 	//검색 한 전체 게시물 리스트 
 	public List<RequestReg> selectRequestList(Map<String, Object> searchMap);
 
+	
 	//검색 후 요청 게시글 전체 검색 
 	public int totalCount(Map<String, Object> searchMap);
 		
 	
 	//요청 게시글 리스트 검색
-	public List<RequestReg> selectAllList();
+	public List<RequestReg> selectAllList(Map<String, Object> searchMap);
 	
 	
-	// 전체 게시물 타입 별로 리스트  - 검색어 없을 떄 
-	public int boardTotalCount();
+	// 전체 게시물 타입 별로 리스트  - 검색어 없을 떄  / 비회원 일 때 전체 게시물 개수 
+	public int allTotalCount();
+
+	
+	
+	
+	
+	
+	
+	
+	//로그인 한 사용자 거리 계산 된 전체 게시글 리스트 
+	public List<RequestReg> loginDistanceAll(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
+	
+	//로그인 한 사용자 최신 순으로 리스트 출력
+	public List<RequestReg> loginDateAll(Map<String, Object> distanceMap);
+	
+	//거리 계산 된 전체 게시물 개수 
+	public int loginTotalCount();
 
 
+	
 	
 	
 	
