@@ -1,5 +1,8 @@
 package com.aia.rl.review.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,15 @@ public class ReviewCheck {
 	private SqlSessionTemplate template;
 	
 
-	public Review reviewCheck(String nick) {
+	public Review reviewCheck(String mNick, int idx) {
 	
 		dao = template.getMapper(ReviewDao.class);
-		return dao.selectReview(nick);
+	
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("mNick",mNick);
+		map.put("idx",idx);
+		
+		return dao.selectReview(map);
 	}
 
 }

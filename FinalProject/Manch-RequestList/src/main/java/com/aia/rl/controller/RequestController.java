@@ -91,7 +91,7 @@ public class RequestController {
 		return deleteService.reqeustDelete(idx, request);
 	}
 
-	// 요청글 상태 정보 변경 - 리뷰 작성 가능 여부 확인 
+	// 요청글 상태 정보 변경  - 매칭 취소 시 
 	@PutMapping("/{idx}")
 	public int reqestStatusEdit(@PathVariable("idx") int idx) {
 		return statusService.requestStatusEdit(idx);
