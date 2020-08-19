@@ -1,5 +1,6 @@
 package com.aia.rl.controller;
 
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aia.rl.model.ReqeustRegReq;
+import com.aia.rl.model.RequestChat;
 import com.aia.rl.model.RequestEdit;
 import com.aia.rl.model.RequestReg;
 import com.aia.rl.model.RequestRegView;
@@ -43,45 +45,39 @@ public class RequestController {
 
 	@Autowired
 	private ReqeustDeleteService deleteService;
-	
+
 	@Autowired
 	private RequestStatusService statusService;
-	
-	@Autowired
-	private RequestChatCompleteService completeService;
-	
+
+
+
 	// 요청 게시물 등록
 	@PostMapping
-	public int requestReg(ReqeustRegReq requestRegReq,HttpServletRequest request) {
-		
+	public int requestReg(ReqeustRegReq requestRegReq, HttpServletRequest request) {
 		return regService.requestReg(requestRegReq, request);
 	}
 
-	//요청 글 게시물 출력 & 검색
+	// 요청 글 게시물 출력 & 검색
 	@GetMapping
 	public RequestRegView requestList(
-			@RequestParam("mLat") String mLat, 
+			@RequestParam("mLat") String mLat,
 			@RequestParam("mLon") String mLon,
 			@RequestParam("mRadius") int mRadius,
-			@RequestParam("type") String type,
+			@RequestParam("type") String type, 
 			@RequestParam("page") int page,
 			@RequestParam("searchText") String searchText, 
-			@RequestParam("searchType") String searchType
-			) {
-		
-		RequestRegView resultView = listService.requestList(mLat, mLon, mRadius,type,page,searchText,searchType);
-		System.out.println(resultView.getPageTotalCount());
-		return listService.requestList(mLat, mLon, mRadius,type,page,searchText,searchType);
+			@RequestParam("searchType") String searchType) {
+
+		return listService.requestList(mLat, mLon, mRadius, type, page, searchText, searchType);
 	}
 
 	// 요청 글 상세 정보 출력
 	@GetMapping("/{idx}")
-	public RequestReg requestDetail(@PathVariable("idx") int idx,
-			@RequestParam("count") int count,
+	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count,
 			HttpServletRequest request) {
-		return detailService.requestDetail(idx,request,count);
+		return detailService.requestDetail(idx, request, count);
 	}
-	
+
 	// 요청 글 수정
 	@PostMapping("/{idx}")
 	public int requestEdit(@PathVariable("idx") int reqIdx, RequestEdit edit, HttpServletRequest request) {
@@ -94,23 +90,13 @@ public class RequestController {
 	public int requestDelete(@PathVariable("idx") int idx, HttpServletRequest request) {
 		return deleteService.reqeustDelete(idx, request);
 	}
-	
-	//요청글 상태 정보 변경
+
+	// 요청글 상태 정보 변경 - 리뷰 작성 가능 여부 확인 
 	@PutMapping("/{idx}")
 	public int reqestStatusEdit(@PathVariable("idx") int idx) {
 		return statusService.requestStatusEdit(idx);
 	}
-	
-	//매칭 상대 선택 
-	@GetMapping("/{idx}")
-	public void chatComplete(@PathVariable("idx") int idx) {
-		
-		System.out.println("채팅 게시글 번호 " +  idx);
-		
-		//return completeService.cahtComplete(mNick);
-	}
-	
-	
-	
-	
+
+
+
 }

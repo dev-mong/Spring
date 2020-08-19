@@ -21,7 +21,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reqStatus" column="request_status" />
 		<result property="reqImg" column="request_img" />
 	</resultMap>
-
+	
+	
+	
+	<resultMap id="chat" type="com.aia.rl.model.RequestChat">
+		<result property="helper" column="member1"/>
+		<collection property="reqList" resultMap="requestList" />
+	</resultMap>
+	
 	<!-- 게시글 등록 -->
 	<insert id="insertRequest"
 		parameterType="com.aia.rl.model.RequestReg">
@@ -58,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllList" resultMap="requestList"
 		parameterType="map">
 		select * from
-		Mangchi.request_list order by request_date
+		Mangchi.request_list order by request_date desc
 		limit #{startRow}, #{count}
 	</select>
 
@@ -216,7 +223,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		request_idx=#{reqIdx}
 	</delete>
 
-
+	<!-- 취소 시 상태 정보 변경 -->
 	<update id="statusEdit" parameterType="int">
 		update
 		Mangchi.request_list set request_status = #{reqStatus} where
@@ -232,7 +239,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where request_idx=#{idx}
 	</update>
 
-
+	
+	
+	<!-- 채팅 상대 선택 -->
+	<select id="selectChatRoom" parameterType="int" resultMap="chat">
+		SELECT member1 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
+	</select>
+	
+	
+	<!-- 수행자 등록 -->
+	<update id="helperReg" parameterType="map">
+		update
+		Mangchi.request_list set request_helper=#{helper}, request_status=1
+		where request_idx=#{idx} 
+	</update>	
 
 
 

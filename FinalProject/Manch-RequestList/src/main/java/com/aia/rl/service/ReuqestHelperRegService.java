@@ -1,31 +1,34 @@
 package com.aia.rl.service;
 
-
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aia.rl.dao.RequestDao;
-import com.aia.rl.model.RequestChat;
 
 @Service
-public class RequestChatCompleteService {
-	
-	
+public class ReuqestHelperRegService {
+
 	private RequestDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<RequestChat> cahtComplete(int idx) {
+	
+	public int helperReg(String helper, int idx) {
+		
 		
 		dao=template.getMapper(RequestDao.class);
+
+		Map<String, Object> helperMap = new HashMap<String, Object>();
+		helperMap.put("helper", helper);
+		helperMap.put("idx", idx);
 		
-		return dao.selectChatRoom(idx); //채팅 요청 한 요청자 검색 
+		return 	dao.helperReg(helperMap);
 	}
-	
 	
 	
 	

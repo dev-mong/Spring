@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.aia.rl.model.RequestChat;
 import com.aia.rl.model.RequestReg;
 
 public interface RequestDao {
@@ -64,6 +65,16 @@ public interface RequestDao {
 
 	//타입 별로 거리 계산된 리스트 검색 총 개수 
 	public int searchDistanceTotalCount(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap);
+
+	
+	
+	
+	//채팅 상대 선택 
+	public List<RequestChat> selectChatRoom(int idx);
+
+
+	//채팅 완료 상대 등록
+	public int helperReg(Map<String, Object> helperMap);
 
 	
 

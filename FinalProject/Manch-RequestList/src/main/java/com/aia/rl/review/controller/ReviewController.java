@@ -30,10 +30,10 @@ public class ReviewController {
 		return regService.reviewReg(review);
 	}
 	
-	
 	//리뷰 작성자 확인
 	@PostMapping("/{mNick}")
 	public Review nickCheck(@PathVariable ("mNick") String nick) {
+		
 		return checkServie.reviewCheck(nick);
 	}
 	

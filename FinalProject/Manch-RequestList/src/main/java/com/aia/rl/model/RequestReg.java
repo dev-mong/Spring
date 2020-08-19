@@ -1,6 +1,7 @@
 package com.aia.rl.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,12 +24,20 @@ public class RequestReg {
 	
 	private int calDistance;
 	
+	private List<RequestChat> chatList;
+	
 	public RequestReg() {
 	}
 
+	
+	
+	
+	
+	
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqHelper, Timestamp reqDateTime,
 			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
-			String reqImg) {
+			String reqImg, List<RequestChat> chatList) {
+		super();
 		this.reqIdx = reqIdx;
 		this.reqWriter = reqWriter;
 		this.reqTitle = reqTitle;
@@ -41,8 +50,14 @@ public class RequestReg {
 		this.reqCount = reqCount;
 		this.reqStatus = reqStatus;
 		this.reqImg = reqImg;
+		this.chatList = chatList;
 	}
-	
+
+
+
+
+
+
 	//등록
 	public RequestReg(String reqWriter, String reqTitle, String reqAddr, String reqContents, String reqLatitude,
 			String reqLongitude) {
@@ -184,6 +199,27 @@ public class RequestReg {
 	public void setCalDistance(int calDistance) {
 		this.calDistance = calDistance;
 	}
+	
+	
+	
+
+	public List<RequestChat> getChatList() {
+		return chatList;
+	}
+
+
+
+
+
+
+	public void setChatList(List<RequestChat> chatList) {
+		this.chatList = chatList;
+	}
+
+
+
+
+
 
 	@Override
 	public String toString() {
