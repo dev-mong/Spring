@@ -18,9 +18,13 @@ public class ReqeustDetailService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestReg requestDetail(int idx,HttpServletRequest request) {
+	public RequestReg requestDetail(int idx,HttpServletRequest request,int count) {
 		
 		dao = template.getMapper(RequestDao.class);
+		
+		count++;
+		//조회수 증가
+		dao.updateCount(idx,count);
 		
 		RequestReg reg = dao.selectIdx(idx);
 		

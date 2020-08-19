@@ -56,7 +56,7 @@ public class RequestListService {
 			distanceMap.put("mLon", mLon);
 		}
 		distanceMap.put("mRadius", mRadius);
-
+		distanceMap.put("type",type);
 		
 		
 		// 회원인지 비회원인지 알려주기
@@ -73,50 +73,28 @@ public class RequestListService {
 
 		} else { // 회원 일 떄
 
-			if (type.equals("distance")) { // 거리 순 출력
-				result = dao.loginDistanceAll(distanceMap,searchMap); //회원 거리순 게시물 출력
+				result = dao.loginDistanceAll(distanceMap,searchMap); //회원 거리순 게시물 출력 - type
+				listTotalCnt = dao.loginTotalCount(distanceMap,searchMap);// 거리 계산한 게시물 수
 				
 				//검색어가 있을 때 전체 리스트 검색 
 				if(searchText !=null && !searchText.isEmpty()) {
 					result = dao.searchDistance(distanceMap,searchMap);
-					listTotalCnt = result.size();
-					
+					listTotalCnt = dao.searchDistanceTotalCount(distanceMap,searchMap);
 				}
-				
-			} else if (type.equals("date")) { // 날짜 순 출력
-				result = dao.loginDateAll(distanceMap,searchMap); // 회원 날짜순 게시물 출력
-				
-				if(searchText !=null && !searchText.isEmpty()) {
-					result = dao.searchDate(distanceMap,searchMap);
-					listTotalCnt = result.size();
-				}
-				
-				
-			}
-			listTotalCnt = result.size(); // 거리 계산한 게시물 수 
-
-		
+			
 		}
 		
 		
 		
+		for(int i=0;i<result.size();i++) {
+			double distance = result.get(i).getDistance();
+			double test = Math.round(distance*100);
+			int calDistance = (int)(test) * 10;
+			result.get(i).setCalDistance(calDistance);
+		}
 		
-		// 페이징 처리
-//		if (listTotalCnt > 0) {
-//
-//			// 검색어가 있을 때 전체 리스트 검색
-//			if (searchText != null && !searchText.isEmpty()) {
-//				result = dao.selectRequestList(searchMap);
-//				listTotalCnt = dao.totalCount(searchMap);
-//			}
-//
-//			result = dao.selectRequestList(searchMap);
-//
-//		} else {
-//			currentPageNum = 0;
-//			result = Collections.emptyList();
-//		}
-
+		
+		
 		RequestRegView resultView = new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, result,
 				startRow);
 

@@ -32,47 +32,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
+	<!-- sql include -->
+	<sql id="wheretitle">
+		or request_title like concat('%',#{search},'%')
+	</sql>
+
+	<sql id="whereName">
+		or request_writer like concat('%',#{search},'%')
+	</sql>
+
+
+	<sql id="distance">
+		select *,
+		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
+		as distance
+		from Mangchi.request_list
+	</sql>
+
+
+
+	<!-- 비회원 -->
 
 	<!-- 비회원 게시글 출력 -->
-	<select id="selectAllList" resultMap="requestList" parameterType="map">
+	<select id="selectAllList" resultMap="requestList"
+		parameterType="map">
 		select * from
-		Mangchi.request_list limit #{startRow}, #{count}
-	</select> 
-	
+		Mangchi.request_list order by request_date
+		limit #{startRow}, #{count}
+	</select>
+
 	<!-- 비회원 전체 게시물 수 -->
 	<select id="allTotalCount" resultType="int">
 		select count(*) from
 		Mangchi.request_list
 	</select>
 
-	
-	<!-- 회원 거리 순으로 출력 -->
-	<select id="loginDistanceAll" parameterType="map" resultMap="requestList">
-		<![CDATA[SELECT *,
-		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
-		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
-		AS distance
-		FROM Mangchi.request_list
-		HAVING distance < #{distanceMap.mRadius}
-		ORDER BY distance
-		limit #{searchMap.startRow}, #{searchMap.count}]]>
-	</select>
-	
-	<!-- 회원 날짜 순으로 출력 -->
-	<select id="loginDateAll" parameterType="map" resultMap="requestList">
-		<![CDATA[SELECT *,
-		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
-		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
-		AS distance
-		FROM Mangchi.request_list
-		HAVING distance < #{distanceMap.mRadius}
-		ORDER BY request_date
-		limit #{searchMap.startRow}, #{searchMap.count}]]>
-	</select>
-	
-
-
-	<!-- 검색어가 있을 떄 전체 게시물 수  -->
+	<!-- 검색어가 있을 떄 전체 게시물 수 -->
 	<select id="totalCount" resultType="int" parameterType="map">
 		select count(*) from Mangchi.request_list
 		<where>
@@ -87,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-
+	<!-- 검색어가 있을 떄 전체 게시글 -->
 	<select id="selectRequestList" parameterType="map"
 		resultMap="requestList">
 
@@ -106,51 +102,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<sql id="wheretitle">
-		or request_title like concat('%',#{search},'%')
-	</sql>
-
-	<sql id="whereName">
-		or request_writer like concat('%',#{search},'%')
-	</sql>
 
 
+	<!-- 회원 -->
 
 	<!-- 회원 거리 순으로 출력 -->
-	<select id="searchDistance" parameterType="map" resultMap="requestList">
-		SELECT *,
-		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
-		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
-		AS distance
-		FROM Mangchi.request_list
-		
-		<where>
-			<if test="searchMap.type != null">
-				<if test="searchMap.type == 'title'">
-					or request_title like concat('%',#{searchMap.search},'%')
-				</if>
-				<if test="searchMap.type == 'name'">
-					or request_writer like concat('%',#{searchMap.search},'%')
-				</if>
+	<select id="loginDistanceAll" parameterType="map"
+		resultMap="requestList">
+		<include refid="distance" />
+		<![CDATA[having distance < #{distanceMap.mRadius}]]>
+		<if test="distanceMap.type != null">
+			<if test="distanceMap.type == 'date'">
+				order by request_date
 			</if>
-		</where>
-		
-		
-		<![CDATA[
-		HAVING distance < #{distanceMap.mRadius}
-		ORDER BY distance
-		limit #{searchMap.startRow}, #{searchMap.count}]]>
+			<if test="distanceMap.type == 'distance'">
+				order by distance
+			</if>
+		</if>
+		limit #{searchMap.startRow}, #{searchMap.count}
 	</select>
-	
-	<!-- 회원 날짜 순으로 출력 -->
-	<select id="searchDate" parameterType="map" resultMap="requestList">
-		SELECT *,
-		(6371*acos(cos(radians(#{distanceMap.mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
-		-radians(#{distanceMap.mLon}))+sin(radians(#{distanceMap.mLat}))*sin(radians(request_latitude))))
-		AS distance
-		FROM Mangchi.request_list
-		
-		
+
+
+	<!-- 회원 리스트 전체 게시물 수 -->
+	<select id="loginTotalCount" parameterType="map"
+		resultType="int">
+		select count(*) cnt from
+		(
+			<include refid="distance" />
+			<![CDATA[having distance < #{distanceMap.mRadius}]]>
+		) as cnt
+
+	</select>
+
+
+
+	<!-- 회원 거리 순으로 검색 출력 -->
+	<select id="searchDistance" parameterType="map"
+		resultMap="requestList">
+
+		<include refid="distance" />
 		<where>
 			<if test="searchMap.type != null">
 				<if test="searchMap.type == 'title'">
@@ -161,11 +151,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>
 			</if>
 		</where>
-		
 		<![CDATA[
-		HAVING distance < #{distanceMap.mRadius}
-		ORDER BY request_date
-		limit #{searchMap.startRow}, #{searchMap.count}]]>
+		having distance < #{distanceMap.mRadius}]]>
+
+		<if test="distanceMap.type != null">
+			<if test="distanceMap.type == 'date'">
+				order by distance
+			</if>
+			<if test="distanceMap.type == 'distance'">
+				order by request_date
+			</if>
+		</if>
+		limit #{searchMap.startRow}, #{searchMap.count}
+	</select>
+
+
+	
+	<!-- 계산 된 거리 리스트를 검색 한 총 데이터 수  -->
+	<select id="searchDistanceTotalCount" parameterType="map" resultType="int">
+		select count(*) cnt from (
+		<include refid="distance" />
+		<where>
+			<if test="searchMap.type != null">
+				<if test="searchMap.type == 'title'">
+					or request_title like concat('%',#{searchMap.search},'%')
+				</if>
+				<if test="searchMap.type == 'name'">
+					or request_writer like concat('%',#{searchMap.search},'%')
+				</if>
+			</if>
+		</where>
+		<![CDATA[
+		having distance < #{distanceMap.mRadius}]]> )
+		as cnt		
 	</select>
 
 
@@ -204,6 +222,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		Mangchi.request_list set request_status = #{reqStatus} where
 		request_idx = #{idx}
 	</update>
+
+
+
+	<!-- 글 조회수 증가 -->
+	<update id="updateCount" parameterType="int">
+		update
+		Mangchi.request_list set request_count=#{count}
+		where request_idx=#{idx}
+	</update>
+
 
 
 

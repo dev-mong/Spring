@@ -25,15 +25,11 @@ public interface RequestDao {
 	//요청 글 취소 상태 변경
 	public int statusEdit(@Param("idx") int idx, @Param("reqStatus") int reqStatus);
 	
+	//조회수 증가
+	public void updateCount(@Param("idx") int idx, @Param("count") int count);
+
 	
 	
-	/*
-	 * //제목 검색, 닉네임 검색 public List<RequestReg> selectSearch(@Param("search") String
-	 * search);
-	 */
-
-
-
 	
 	
 	//검색 한 전체 게시물 리스트 
@@ -57,23 +53,37 @@ public interface RequestDao {
 	
 	
 	
-	
-	//로그인 한 사용자 거리 계산 된 전체 게시글 리스트 
+	//거리 계산 된 전체 리스트 타입 별로 출력
 	public List<RequestReg> loginDistanceAll(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
 	
-	//로그인 한 사용자 최신 순으로 리스트 출력
-	public List<RequestReg> loginDateAll(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
-	
 	//거리 계산 된 전체 게시물 개수 
-	public int loginTotalCount();
+	public int loginTotalCount(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
 
-	//거리순으로 검색
+	//타입 별로 거리 계산 한 리스트 검색 데이터 출력 
 	public List<RequestReg> searchDistance(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
 
-	//시간순으로 검색
-	public List<RequestReg> searchDate(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap );
+	//타입 별로 거리 계산된 리스트 검색 총 개수 
+	public int searchDistanceTotalCount(@Param("distanceMap") Map<String, Object> distanceMap, @Param("searchMap") Map<String, Object> searchMap);
+
+	
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

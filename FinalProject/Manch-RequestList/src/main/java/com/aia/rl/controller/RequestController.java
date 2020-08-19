@@ -1,6 +1,5 @@
 package com.aia.rl.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,9 +20,9 @@ import com.aia.rl.model.RequestRegView;
 import com.aia.rl.service.ReqeustDeleteService;
 import com.aia.rl.service.ReqeustDetailService;
 import com.aia.rl.service.ReqeustEditService;
+import com.aia.rl.service.RequestChatCompleteService;
 import com.aia.rl.service.RequestListService;
 import com.aia.rl.service.RequestRegService;
-import com.aia.rl.service.RequestSearchServcie;
 import com.aia.rl.service.RequestStatusService;
 
 @RestController
@@ -49,9 +48,7 @@ public class RequestController {
 	private RequestStatusService statusService;
 	
 	@Autowired
-	private RequestSearchServcie searchServie;
-	
-
+	private RequestChatCompleteService completeService;
 	
 	// 요청 게시물 등록
 	@PostMapping
@@ -60,9 +57,8 @@ public class RequestController {
 		return regService.requestReg(requestRegReq, request);
 	}
 
-	//요청 글 게시물 출력 
+	//요청 글 게시물 출력 & 검색
 	@GetMapping
-	//public List<RequestReg> requestList(
 	public RequestRegView requestList(
 			@RequestParam("mLat") String mLat, 
 			@RequestParam("mLon") String mLon,
@@ -73,17 +69,17 @@ public class RequestController {
 			@RequestParam("searchType") String searchType
 			) {
 		
-		System.out.println("검색 데이터 컨트롤러 >>>"+searchText+ " "+searchType );
-		System.out.println("컨트롤러 출력 순서 " +type);
-		
+		RequestRegView resultView = listService.requestList(mLat, mLon, mRadius,type,page,searchText,searchType);
+		System.out.println(resultView.getPageTotalCount());
 		return listService.requestList(mLat, mLon, mRadius,type,page,searchText,searchType);
 	}
 
 	// 요청 글 상세 정보 출력
 	@GetMapping("/{idx}")
-	public RequestReg requestDetail(@PathVariable("idx") int idx,HttpServletRequest request) {
-
-		return detailService.requestDetail(idx,request);
+	public RequestReg requestDetail(@PathVariable("idx") int idx,
+			@RequestParam("count") int count,
+			HttpServletRequest request) {
+		return detailService.requestDetail(idx,request,count);
 	}
 	
 	// 요청 글 수정
@@ -105,13 +101,16 @@ public class RequestController {
 		return statusService.requestStatusEdit(idx);
 	}
 	
-	//요청 글 검색 
-	@GetMapping("/search")
-	public RequestRegView searchRequest(@RequestParam("searchText") String search,
-			@RequestParam("type") String type,
-			@RequestParam("page") int page) {
+	//매칭 상대 선택 
+	@GetMapping("/{idx}")
+	public void chatComplete(@PathVariable("idx") int idx) {
 		
-		return searchServie.requestSearch(search,type,page);
+		System.out.println("채팅 게시글 번호 " +  idx);
+		
+		//return completeService.cahtComplete(mNick);
 	}
+	
+	
+	
 	
 }

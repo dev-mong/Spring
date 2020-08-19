@@ -1,6 +1,5 @@
 package com.aia.rl.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,7 +19,9 @@ public class RequestReg {
 	private int reqCount;
 	private int reqStatus;
 	private String reqImg;
-	private int distance;
+	private double distance; //디비와 이름 동일 
+	
+	private int calDistance;
 	
 	public RequestReg() {
 	}
@@ -165,14 +166,24 @@ public class RequestReg {
 		this.reqImg = reqImg;
 	}
 
-	public int getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
-	public int setDistance(int distance) {
+	public double setDistance(double distance) {
 		return this.distance = distance;
 	}
 
+
+	
+	
+	public int getCalDistance() {
+		return calDistance;
+	}
+
+	public void setCalDistance(int calDistance) {
+		this.calDistance = calDistance;
+	}
 
 	@Override
 	public String toString() {
