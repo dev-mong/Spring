@@ -20,8 +20,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectReview" resultMap="review">
-		select * from Mangchi.review where review_writer=#{nick};
+		select * from Mangchi.review where review_writer=#{nick}
 	</select>
 	
+	<select id="selectReview" resultMap="review">
+		select * from Mangchi.review where review_writer=#{nick}
+		limit #{startRow}, #{count}
+	</select>
+	
+	<select id="totalReview" resultType="int">
+		select count(*) from Mangchi.review where review_writer=#{nick}
+	</select>
 	
 </mapper>

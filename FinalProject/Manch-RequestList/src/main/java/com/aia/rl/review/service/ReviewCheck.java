@@ -20,8 +20,6 @@ public class ReviewCheck {
 	public Review reviewCheck(String nick) {
 	
 		dao = template.getMapper(ReviewDao.class);
-
-		
 		return dao.selectReview(nick);
 	}
 

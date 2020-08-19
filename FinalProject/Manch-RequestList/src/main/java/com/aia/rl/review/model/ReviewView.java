@@ -1,8 +1,9 @@
-package com.aia.rl.model;
+package com.aia.rl.review.model;
 
 import java.util.List;
 
-public class RequestRegView {
+
+public class ReviewView {
 
 	// 전체 리스트 수
 	private int listTotalCnt;
@@ -16,19 +17,19 @@ public class RequestRegView {
 	// 현재 페이지의 번호
 	private int currentPageNum;
 
-	// 출력 할 게시글 리스트 
-	private List<RequestReg> requestReg;
+	// 출력 할 리뷰 
+	private List<Review> reviewList;
 
 	// 게시물의 시작 행
 	private int startRow;
 	
 
-	public RequestRegView(int listTotalCnt, int requestCountPage, int currentPageNum, List<RequestReg> requestReg,
+	public ReviewView(int listTotalCnt, int requestCountPage, int currentPageNum, List<Review> reviewList,
 			int startRow) {
 		this.listTotalCnt = listTotalCnt;
 		this.requestCountPage = requestCountPage;
 		this.currentPageNum = currentPageNum;
-		this.requestReg = requestReg;
+		this.reviewList = reviewList;
 		this.startRow = startRow;
 		calTotalCount();
 	}
@@ -78,12 +79,12 @@ public class RequestRegView {
 		this.currentPageNum = currentPageNum;
 	}
 
-	public List<RequestReg> getRequestReg() {
-		return requestReg;
+	public List<Review> getRequestReg() {
+		return reviewList;
 	}
 
-	public void setRequestReg(List<RequestReg> requestReg) {
-		this.requestReg = requestReg;
+	public void setRequestReg(List<Review> reviewList) {
+		this.reviewList = reviewList;
 	}
 
 	public int getStartRow() {
@@ -98,7 +99,7 @@ public class RequestRegView {
 	public String toString() {
 		return "RequestRegView [listTotalCnt=" + listTotalCnt + ", pageTotalCount=" + pageTotalCount
 				+ ", requestCountPage=" + requestCountPage + ", currentPageNum=" + currentPageNum + ", requestReg="
-				+ requestReg + ", startRow=" + startRow + "]";
+				+ reviewList + ", startRow=" + startRow + "]";
 	}
 
 	
