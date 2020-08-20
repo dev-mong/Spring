@@ -18,12 +18,14 @@ public interface ReviewDao {
 	//작성 한 리뷰의 평점 출력 
 	public int selectReg(String mNick);
 
+	
+	//회원이 작성 한 리뷰 
 	public List<Review> reviewList(String mNick);
 	
 	
 	
 	//리뷰 리스트 개수 
-	//public int totalReview(String mNick);
+	public int totalReview(String mNick);
 
 	
 

@@ -20,22 +20,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectReview" resultMap="review" parameterType="map">
-		select * from Mangchi.review where review_writer=#{nick} and request_idx=#{idx}
+		select * from Mangchi.review where review_writer=#{mNick} and request_idx=#{idx}
 	</select>
 	
 	
 	
-	<!-- 평점  리스트는 여러개 .. ? -->
+	<!-- 평점을 계산 해서 출력-->
 	<select id="selectReg" resultType="int">
-		select avg(review_avg)  from Mangchi.review where review_receiver=#{nick}
+		select avg(review_avg)  from Mangchi.review where review_receiver=#{mNick}
 	</select>
 	
+	<!-- 회원이 작성한 리뷰 -->
 	<select id="reviewList" resultMap="review">
-		select * from Mangchi.review where review_receiver=#{nick}
+		select * from Mangchi.review where review_writer=#{mNick}
 	</select>
 	
-	<!-- <select id="totalReview" resultType="int">
-		select count(*) from Mangchi.review where review_receiver=#{nick}
-	</select> -->
+	<!-- 회원이 작성한 리뷰 전체 수  -->			
+	<select id="totalReview" resultType="int">
+		select count(*) from Mangchi.review where review_writer=#{mNick}
+	</select>
 	
 </mapper>
