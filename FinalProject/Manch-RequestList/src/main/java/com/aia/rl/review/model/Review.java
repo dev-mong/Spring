@@ -1,5 +1,9 @@
 package com.aia.rl.review.model;
 
+import java.util.List;
+
+import com.aia.rl.model.RequestReg;
+
 public class Review {
 	
 	private int reqIdx;
@@ -7,17 +11,19 @@ public class Review {
 	private String writer;
 	private String text;
 	private int avg;
-	
+
+	private List<RequestReg> reqList;
 	
 	public Review() {
 	}
 
-	public Review(int reqIdx, String receiver, String writer, String text, int avg) {
+	public Review(int reqIdx, String receiver, String writer, String text, int avg, List<RequestReg> reqList) {
 		this.reqIdx = reqIdx;
 		this.receiver = receiver;
 		this.writer = writer;
 		this.text = text;
 		this.avg = avg;
+		this.reqList = reqList;
 	}
 
 	public int getReqIdx() {
@@ -60,10 +66,18 @@ public class Review {
 		this.avg = avg;
 	}
 
+	public List<RequestReg> getReqList() {
+		return reqList;
+	}
+
+	public void setReqList(List<RequestReg> reqList) {
+		this.reqList = reqList;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [reqIdx=" + reqIdx + ", receiver=" + receiver + ", writer=" + writer + ", text=" + text
-				+ ", avg=" + avg + "]";
+				+ ", avg=" + avg + ", reqList=" + reqList + "]";
 	}
 
 	

@@ -1,12 +1,13 @@
 package com.aia.rl.review.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aia.rl.model.RequestRegView;
 import com.aia.rl.review.dao.ReviewDao;
 import com.aia.rl.review.model.Review;
 import com.aia.rl.review.model.ReviewView;
@@ -30,9 +31,19 @@ public class ReviewListService {
 		int currentPageNum = page; // 현재 페이지
 		int startRow = (currentPageNum - 1) * REQUEST_COUNT_PAGE; // 시작 행
 		
-		List<Review> list = dao.reviewList(mNick); // 로그인 한 사용자 가 작성한 전체 리뷰 
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mNick",mNick);
+		map.put("startRow", startRow);
+		map.put("count", REQUEST_COUNT_PAGE);
+		
+		List<Review> list = dao.reviewList(map); // 로그인 한 사용자 가 작성한 전체 리뷰 
 		
 		int avg = dao.selectReg(mNick); //회원 평점
+		
+		System.out.println("리뷰 리스트 현재 페이지 >>"+currentPageNum);
+		System.out.println("전체 게시물 >>"+listTotalCnt);
+		System.out.println("리뷰 리스트 시작행 >> "+ startRow);
+		
 		
 		ReviewView result = new ReviewView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, list, startRow, avg);
 		

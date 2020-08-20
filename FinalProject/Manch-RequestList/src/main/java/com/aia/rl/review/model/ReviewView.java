@@ -49,6 +49,8 @@ public class ReviewView {
 				}
 
 			}
+			
+			System.out.println("리뷰 리스트 전체 페이지 수 >> "+pageTotalCount);
 		}
 
 		public int getListTotalCnt() {

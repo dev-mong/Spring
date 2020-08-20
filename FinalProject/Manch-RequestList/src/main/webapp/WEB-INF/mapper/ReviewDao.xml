@@ -5,12 +5,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.aia.rl.review.dao.ReviewDao">
 
+	<resultMap id="requestList"
+		type="com.aia.rl.model.RequestReg">
+		<result property="reqIdx" column="request_idx" />
+		<result property="reqWriter" column="request_writer" />
+		<result property="reqTitle" column="request_title" />
+		<result property="reqHelper" column="request_helper" />
+		<result property="reqDateTime" column="request_date" />
+		<result property="reqAddr" column="request_addr" />
+		<result property="reqContents" column="request_contents" />
+		<result property="reqLatitude" column="request_latitude" />
+		<result property="reqLongitude" column="request_longitude" />
+		<result property="reqCount" column="request_count" />
+		<result property="reqStatus" column="request_status" />
+		<result property="reqImg" column="request_img" />
+	</resultMap>
+	
+
 	<resultMap id="review" type="com.aia.rl.review.model.Review">
 		<result column="request_idx" property="reqIdx" />
 		<result column="review_receiver" property="receiver" />
 		<result column="review_writer" property="writer" />
 		<result column="review_text" property="text" />
 		<result column="review_avg" property="avg" />
+		<collection property="reqList" resultMap="requestList" />
 	</resultMap>
 	
 	<insert id="insertReview" parameterType="com.aia.rl.review.model.Review">
@@ -23,8 +41,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from Mangchi.review where review_writer=#{mNick} and request_idx=#{idx}
 	</select>
 	
-	
-	
 	<!-- 평점을 계산 해서 출력-->
 	<select id="selectReg" resultType="int">
 		select avg(review_avg)  from Mangchi.review where review_receiver=#{mNick}
@@ -32,12 +48,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원이 작성한 리뷰 -->
 	<select id="reviewList" resultMap="review">
-		select * from Mangchi.review where review_writer=#{mNick}
+		select request_title,review_receiver,review_writer,review_text
+		from Mangchi.review as w join Mangchi.request_list as r 
+		on r.request_idx=w.request_idx and w.review_writer=#{mNick} and r.request_idx=w.request_idx
+		limit #{startRow}, #{count}
 	</select>
+	
 	
 	<!-- 회원이 작성한 리뷰 전체 수  -->			
 	<select id="totalReview" resultType="int">
 		select count(*) from Mangchi.review where review_writer=#{mNick}
 	</select>
+	
+	
+	<!-- 리뷰 작성 여부 확인 -->
+	<select id="selectReqIdx" resultMap="review">
+		select * from Mangchi.review where request_idx=#{idx}
+	</select>
+	
+	
 	
 </mapper>

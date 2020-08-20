@@ -13,13 +13,10 @@ public class RequestChat {
 	private List<RequestReg> reqList;
 
 	public RequestChat() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RequestChat(int chatIdx, String chatName, int requestIdx, String helper, String writer,
 			List<RequestReg> reqList) {
-		super();
 		this.chatIdx = chatIdx;
 		this.chatName = chatName;
 		this.requestIdx = requestIdx;

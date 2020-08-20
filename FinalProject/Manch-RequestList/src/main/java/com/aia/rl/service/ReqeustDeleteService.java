@@ -10,22 +10,27 @@ import org.springframework.stereotype.Service;
 
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
+import com.aia.rl.review.dao.ReviewDao;
+import com.aia.rl.review.model.Review;
 
 @Service
 public class ReqeustDeleteService {
 
-	private RequestDao dao;
+	private RequestDao reqdao;
+	
+	private ReviewDao reviewDao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
 	
 	public int reqeustDelete(int idx, HttpServletRequest request) {
 		
-		dao=template.getMapper(RequestDao.class);
+		reqdao=template.getMapper(RequestDao.class);
+		reviewDao=template.getMapper(ReviewDao.class);
 		
 		int result = 0;
 		
-		RequestReg reg = dao.selectIdx(idx);
+		RequestReg reg = reqdao.selectIdx(idx);
 		
 		
 		if(reg.getReqImg() !=null && !reg.getReqImg().isEmpty() && reg.getReqImg().length() > 0 && !reg.getReqImg().equals("defalult.png")) {
@@ -46,7 +51,15 @@ public class ReqeustDeleteService {
 			}
 		}
 		
-		result = dao.deleteRequest(idx);
+		
+		//리뷰 작성 여부 확인
+		Review review = reviewDao.selectReqIdx(idx);
+		if(review !=null) {
+			result = 0;
+		} else {
+			result = reqdao.deleteRequest(idx); //삭제 됨 
+		}
+		
 		
 		
 		return result;

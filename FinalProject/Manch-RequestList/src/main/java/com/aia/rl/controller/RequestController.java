@@ -1,6 +1,5 @@
 package com.aia.rl.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aia.rl.model.ReqeustRegReq;
-import com.aia.rl.model.RequestChat;
 import com.aia.rl.model.RequestEdit;
 import com.aia.rl.model.RequestReg;
 import com.aia.rl.model.RequestRegView;
 import com.aia.rl.service.ReqeustDeleteService;
 import com.aia.rl.service.ReqeustDetailService;
 import com.aia.rl.service.ReqeustEditService;
-import com.aia.rl.service.RequestChatCompleteService;
+import com.aia.rl.service.RequestEditDetail;
 import com.aia.rl.service.RequestListService;
 import com.aia.rl.service.RequestRegService;
 import com.aia.rl.service.RequestStatusService;
@@ -39,6 +37,9 @@ public class RequestController {
 
 	@Autowired
 	private ReqeustDetailService detailService;
+	
+	@Autowired
+	private RequestEditDetail editDetailService;
 
 	@Autowired
 	private ReqeustEditService editService;
@@ -73,11 +74,17 @@ public class RequestController {
 
 	// 요청 글 상세 정보 출력
 	@GetMapping("/{idx}")
-	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count,
-			HttpServletRequest request) {
-		return detailService.requestDetail(idx, request, count);
+	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count) {
+		return detailService.requestDetail(idx, count);
 	}
-
+	
+	//요청 글 수정 시 데이터 출력 리스트 
+	@GetMapping("/edit/{idx}")
+	public RequestReg editDetail(@PathVariable("idx") int idx) {
+		return editDetailService.editDetail(idx);
+	}
+	
+	
 	// 요청 글 수정
 	@PostMapping("/{idx}")
 	public int requestEdit(@PathVariable("idx") int reqIdx, RequestEdit edit, HttpServletRequest request) {

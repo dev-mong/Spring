@@ -20,12 +20,17 @@ public interface ReviewDao {
 
 	
 	//회원이 작성 한 리뷰 
-	public List<Review> reviewList(String mNick);
+	public List<Review> reviewList(Map<String, Object> map);
 	
 	
 	
 	//리뷰 리스트 개수 
 	public int totalReview(String mNick);
+	
+	
+	//리뷰 작성 여부 확인 
+	public Review selectReqIdx(int idx);
+
 
 	
 
