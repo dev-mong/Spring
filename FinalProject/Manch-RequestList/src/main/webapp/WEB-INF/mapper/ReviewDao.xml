@@ -23,22 +23,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<resultMap id="review" type="com.aia.rl.review.model.Review">
+		<result column="review_idx" property="reviewIdx" />
 		<result column="request_idx" property="reqIdx" />
 		<result column="review_receiver" property="receiver" />
 		<result column="review_writer" property="writer" />
 		<result column="review_text" property="text" />
 		<result column="review_avg" property="avg" />
+		<result column="review_status" property="status" />
 		<collection property="reqList" resultMap="requestList" />
 	</resultMap>
 	
-	<insert id="insertReview" parameterType="com.aia.rl.review.model.Review">
+	
+	<!-- 매칭 완료 시 리뷰 상태 등록 -->
+	
+	<insert id="insertStatus" parameterType="com.aia.rl.review.model.Review">
 	insert into Mangchi.review
-	(request_idx,review_receiver,review_writer,review_avg,review_text)
-	values(#{reqIdx},#{receiver},#{writer},#{avg},#{text})
+	(request_idx,review_receiver,review_writer,review_status)
+	values(#{reqIdx},#{receiver},#{writer},#{status})
 	</insert>
 	
-	<select id="selectReview" resultMap="review" parameterType="map">
-		select * from Mangchi.review where review_writer=#{mNick} and request_idx=#{idx}
+	<!-- 리뷰 등록 (리뷰 작성 한거 업데이트)-->
+	<insert id="updateReview" parameterType="com.aia.rl.review.model.Review">
+	
+	update Mangchi.review set review_text = #{text}, review_avg= #{avg},
+		review_status = #{status} where review_idx = #{reviewIdx}
+	</insert>
+	
+	
+	
+	
+	
+	
+	<select id="selectReceiver" resultMap="review">
+		select * from Mangchi.review where review_writer=#{reviewWriter} 
 	</select>
 	
 	<!-- 평점을 계산 해서 출력-->
@@ -66,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from Mangchi.review where request_idx=#{idx}
 	</select>
 	
+
 	
 	
 </mapper>

@@ -11,11 +11,13 @@ import org.springframework.stereotype.Service;
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
 import com.aia.rl.model.RequestRegView;
+import com.aia.rl.review.dao.ReviewDao;
 
 @Service
 public class RequestListService {
 
 	private RequestDao dao;
+	
 
 	@Autowired
 	private SqlSessionTemplate template;
@@ -69,7 +71,6 @@ public class RequestListService {
 				result = dao.selectRequestList(searchMap);
 				listTotalCnt = dao.totalCount(searchMap);
 			}
-			
 
 		} else { // 회원 일 떄
 
@@ -92,6 +93,7 @@ public class RequestListService {
 			int calDistance = (int)(test) * 10;
 			result.get(i).setCalDistance(calDistance);
 		}
+		
 		
 		
 		

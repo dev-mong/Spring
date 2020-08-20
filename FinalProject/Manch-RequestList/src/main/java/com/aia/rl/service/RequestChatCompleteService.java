@@ -23,6 +23,7 @@ public class RequestChatCompleteService {
 		
 		dao=template.getMapper(RequestDao.class);
 		
+		
 		return dao.selectChatRoom(idx); //채팅 요청 한 요청자 검색 
 	}
 	

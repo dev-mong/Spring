@@ -9,10 +9,12 @@ import com.aia.rl.review.model.Review;
 public interface ReviewDao {
 
 	//리뷰 등록
-	public int insertReview(Review review);
+	public int updateReview(Review review);
 
-	//리뷰 작성 여부 확인 
-	public Review selectReview(Map<String, Object> map);
+	
+	//상대방이 여러명일 때 리뷰 상대방 선택 
+	public List<Review> selectReceiver(String reviewWriter);
+	 
 	
 	
 	//작성 한 리뷰의 평점 출력 
@@ -29,7 +31,12 @@ public interface ReviewDao {
 	
 	
 	//리뷰 작성 여부 확인 
-	public Review selectReqIdx(int idx);
+	public List<Review> selectReqIdx(int idx);
+	
+	
+	//리뷰 상태 등록
+	public int insertStatus(Review review);
+	
 
 
 	

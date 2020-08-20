@@ -19,7 +19,7 @@ public class ReviewRegServcie {
 		
 		dao=template.getMapper(ReviewDao.class);
 		
-		int result = dao.insertReview(review);
+		int result = dao.updateReview(review);
 		
 		return result;
 	}

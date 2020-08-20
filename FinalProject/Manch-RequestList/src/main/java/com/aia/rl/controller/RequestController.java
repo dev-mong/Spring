@@ -74,8 +74,9 @@ public class RequestController {
 
 	// 요청 글 상세 정보 출력
 	@GetMapping("/{idx}")
-	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count) {
-		return detailService.requestDetail(idx, count);
+	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count,
+			@RequestParam("mNick") String mNick) {
+		return detailService.requestDetail(idx, count,mNick);
 	}
 	
 	//요청 글 수정 시 데이터 출력 리스트 

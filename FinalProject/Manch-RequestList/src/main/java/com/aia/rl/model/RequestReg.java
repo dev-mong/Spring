@@ -20,23 +20,22 @@ public class RequestReg {
 	private int reqCount;
 	private int reqStatus;
 	private String reqImg;
-	private double distance; //디비와 이름 동일 
+	private double distance; // 디비와 이름 동일
+
+	private int calDistance; // 계산 된 거리
+
+	private List<RequestChat> chatList; // 채팅 목록
 	
-	private int calDistance;
 	
-	private List<RequestChat> chatList;
-	
+	private int reviewStatus; // 리뷰 작성 여부 확인
+	private String reviewWriter; // 리뷰 글쓴이
+
 	public RequestReg() {
 	}
 
-	
-	
-	
-	
-	
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqHelper, Timestamp reqDateTime,
 			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
-			String reqImg, List<RequestChat> chatList) {
+			String reqImg, double distance, int calDistance, List<RequestChat> chatList, int reviewStatus, String reviewWriter) {
 		super();
 		this.reqIdx = reqIdx;
 		this.reqWriter = reqWriter;
@@ -50,15 +49,14 @@ public class RequestReg {
 		this.reqCount = reqCount;
 		this.reqStatus = reqStatus;
 		this.reqImg = reqImg;
+		this.distance = distance;
+		this.calDistance = calDistance;
 		this.chatList = chatList;
+		this.reviewStatus = reviewStatus;
+		this.reviewWriter = reviewWriter;
 	}
 
-
-
-
-
-
-	//등록
+	// 등록
 	public RequestReg(String reqWriter, String reqTitle, String reqAddr, String reqContents, String reqLatitude,
 			String reqLongitude) {
 
@@ -73,16 +71,16 @@ public class RequestReg {
 		// reqLongitude, 0, 0, null);
 
 	}
-	
-	//수정
+
+	// 수정
 //	public RequestReg(int reqIdx, String reqTitle, String reqContents, String reqImg, Timestamp reqDateTime) {
-		public RequestReg(int reqIdx, String reqWriter,String reqTitle, String reqContents, String reqImg) {
+	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqContents, String reqImg) {
 		this.reqIdx = reqIdx;
-		this.reqWriter=reqWriter;
+		this.reqWriter = reqWriter;
 		this.reqTitle = reqTitle;
 		this.reqContents = reqContents;
 		this.reqImg = reqImg;
-		//this.reqDateTime = reqDateTime;
+		// this.reqDateTime = reqDateTime;
 	}
 
 	public int getReqIdx() {
@@ -189,9 +187,6 @@ public class RequestReg {
 		return this.distance = distance;
 	}
 
-
-	
-	
 	public int getCalDistance() {
 		return calDistance;
 	}
@@ -199,34 +194,42 @@ public class RequestReg {
 	public void setCalDistance(int calDistance) {
 		this.calDistance = calDistance;
 	}
-	
-	
-	
 
 	public List<RequestChat> getChatList() {
 		return chatList;
 	}
 
-
-
-
-
-
 	public void setChatList(List<RequestChat> chatList) {
 		this.chatList = chatList;
 	}
 
+	public int getReviewStatus() {
+		return reviewStatus;
+	}
+
+	public void setReviewStatus(int reviewStatus) {
+		this.reviewStatus = reviewStatus;
+	}
 
 
+	public String getReviewWriter() {
+		return reviewWriter;
+	}
 
-
+	public void setReviewWriter(String reviewWriter) {
+		this.reviewWriter = reviewWriter;
+	}
 
 	@Override
 	public String toString() {
 		return "RequestReg [reqIdx=" + reqIdx + ", reqWriter=" + reqWriter + ", reqTitle=" + reqTitle + ", reqHelper="
 				+ reqHelper + ", reqDateTime=" + reqDateTime + ", reqAddr=" + reqAddr + ", reqContents=" + reqContents
 				+ ", reqLatitude=" + reqLatitude + ", reqLongitude=" + reqLongitude + ", reqCount=" + reqCount
-				+ ", reqStatus=" + reqStatus + ", reqImg=" + reqImg + ", distance=" + distance + "]";
-
+				+ ", reqStatus=" + reqStatus + ", reqImg=" + reqImg + ", distance=" + distance + ", calDistance="
+				+ calDistance + ", chatList=" + chatList + ", reviewStatus=" + reviewStatus + ", reviewWriter="
+				+ reviewWriter + "]";
 	}
+
+
+
 }

@@ -26,14 +26,18 @@ public class RequestChatController {
 	// 매칭 상대 선택
 	@GetMapping("/complete/{idx}")
 	public List<RequestChat> chatComplete(@PathVariable("idx") int idx) {
-		System.out.println(completeService.cahtComplete(idx));
 		return completeService.cahtComplete(idx);
 	}
 	
 	// 헬퍼 등록
 	@GetMapping("/{idx}")
-	public int helperReg(@PathVariable("idx") int idx, @RequestParam("helper") String helper) {
-		return helperRegService.helperReg(helper, idx);
+	public int helperReg(@PathVariable("idx") int idx, @RequestParam("helper") String helper,
+			@RequestParam("writer") String writer,
+			@RequestParam("mNick") String mNick,
+			@RequestParam("reqIdx") int reqIdx
+			) {
+		
+		return helperRegService.helperReg(helper, idx,writer,reqIdx,mNick);
 	}
 	
 	

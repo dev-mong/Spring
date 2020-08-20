@@ -53,12 +53,10 @@ public class ReqeustDeleteService {
 		
 		
 		//리뷰 작성 여부 확인
-		Review review = reviewDao.selectReqIdx(idx);
-		if(review !=null) {
-			result = 0;
-		} else {
-			result = reqdao.deleteRequest(idx); //삭제 됨 
-		}
+		/*
+		 * Review review = reviewDao.selectReqIdx(idx); if(review !=null) { result = 0;
+		 * } else { result = reqdao.deleteRequest(idx); //삭제 됨 }
+		 */
 		
 		
 		
