@@ -1,6 +1,7 @@
 package com.aia.rl.mypage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class MypageRequestController {
 	private MyListService listService;
 	
 	//요청 글 리스트 타입 별로 출력  .. 
+	@CrossOrigin
 	@GetMapping("/{mNick}")
 	public RequestRegView myList(@PathVariable("mNick") String mNick, 
 			@RequestParam ("type") String type,

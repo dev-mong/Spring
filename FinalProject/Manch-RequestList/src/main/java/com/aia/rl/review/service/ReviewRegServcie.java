@@ -19,6 +19,8 @@ public class ReviewRegServcie {
 		
 		dao=template.getMapper(ReviewDao.class);
 		
+		review.setStatus(1);
+		
 		int result = dao.updateReview(review);
 		
 		return result;

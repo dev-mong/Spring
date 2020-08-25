@@ -25,8 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<resultMap id="chat" type="com.aia.rl.model.RequestChat">
+		<result property="chatIdx" column="room_idx"/>
 		<result property="helper" column="member1"/>
-		<result property="receiver" column="member2"/>
+		<result property="writer" column="member2"/>
 		<result property="requestIdx" column="request_idx"/>
 		<collection property="reqList" resultMap="requestList" />
 	</resultMap>
@@ -245,7 +246,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 채팅 상대 선택 : 게시글 번호, member1(헬퍼), member (글쓴이) -->
 	<select id="selectChatRoom" parameterType="int" resultMap="chat">
-		SELECT member1,member2 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
+		select room_idx,member1,member2 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
 	</select>
 	
 	

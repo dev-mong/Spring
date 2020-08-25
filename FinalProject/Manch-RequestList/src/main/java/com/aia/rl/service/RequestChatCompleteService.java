@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestChat;
+import com.aia.rl.review.dao.ReviewDao;
+import com.aia.rl.review.model.Review;
 
 @Service
 public class RequestChatCompleteService {
@@ -19,7 +21,7 @@ public class RequestChatCompleteService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<RequestChat> cahtComplete(int idx) {
+	public List<RequestChat> cahtComplete(int idx) { //idx -> 게시글 번호 
 		
 		dao=template.getMapper(RequestDao.class);
 		

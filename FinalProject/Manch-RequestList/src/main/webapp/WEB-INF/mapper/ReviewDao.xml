@@ -43,15 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 리뷰 등록 (리뷰 작성 한거 업데이트)-->
-	<insert id="updateReview" parameterType="com.aia.rl.review.model.Review">
+	<update id="updateReview" parameterType="com.aia.rl.review.model.Review">
 	
 	update Mangchi.review set review_text = #{text}, review_avg= #{avg},
 		review_status = #{status} where review_idx = #{reviewIdx}
-	</insert>
-	
-	
-	
-	
+	</update>
 	
 	
 	<select id="selectReceiver" resultMap="review">
@@ -60,21 +56,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 평점을 계산 해서 출력-->
 	<select id="selectReg" resultType="int">
-		select avg(review_avg)  from Mangchi.review where review_receiver=#{mNick}
+		select avg(review_avg)  from Mangchi.review where review_receiver=#{mNick} and review_status=1;
+	</select>
+	
+	<select id="receiveView" resultType="int">
+		select count(*) from Mangchi.review where review_receiver=#{mNick} and review_status=1;
 	</select>
 	
 	<!-- 회원이 작성한 리뷰 -->
 	<select id="reviewList" resultMap="review">
-		select request_title,review_receiver,review_writer,review_text
+		select request_title,review_receiver,review_writer,review_text,review_status
 		from Mangchi.review as w join Mangchi.request_list as r 
-		on r.request_idx=w.request_idx and w.review_writer=#{mNick} and r.request_idx=w.request_idx
+		on r.request_idx=w.request_idx and w.review_writer=#{mNick} and w.review_status=1
 		limit #{startRow}, #{count}
 	</select>
 	
 	
 	<!-- 회원이 작성한 리뷰 전체 수  -->			
 	<select id="totalReview" resultType="int">
-		select count(*) from Mangchi.review where review_writer=#{mNick}
+		select count(*) from Mangchi.review where review_writer=#{mNick} and review_status=1
 	</select>
 	
 	
@@ -83,7 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from Mangchi.review where request_idx=#{idx}
 	</select>
 	
-
+	<select id="selectReqReview" resultMap="review">
+		select * from Mangchi.review where request_idx=#{idx}
+	</select>
 	
 	
 </mapper>

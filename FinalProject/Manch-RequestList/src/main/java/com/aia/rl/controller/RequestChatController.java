@@ -3,6 +3,7 @@ package com.aia.rl.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,20 +25,21 @@ public class RequestChatController {
 	private ReuqestHelperRegService helperRegService;
 	
 	// 매칭 상대 선택
+	@CrossOrigin
 	@GetMapping("/complete/{idx}")
 	public List<RequestChat> chatComplete(@PathVariable("idx") int idx) {
 		return completeService.cahtComplete(idx);
 	}
 	
 	// 헬퍼 등록
+	@CrossOrigin
 	@GetMapping("/{idx}")
 	public int helperReg(@PathVariable("idx") int idx, @RequestParam("helper") String helper,
 			@RequestParam("writer") String writer,
-			@RequestParam("mNick") String mNick,
-			@RequestParam("reqIdx") int reqIdx
+			@RequestParam("mNick") String mNick
 			) {
 		
-		return helperRegService.helperReg(helper, idx,writer,reqIdx,mNick);
+		return helperRegService.helperReg(helper,idx,writer,mNick);
 	}
 	
 	

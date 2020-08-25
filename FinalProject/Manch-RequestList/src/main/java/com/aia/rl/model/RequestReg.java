@@ -29,13 +29,17 @@ public class RequestReg {
 	
 	private int reviewStatus; // 리뷰 작성 여부 확인
 	private String reviewWriter; // 리뷰 글쓴이
+	private int revReqIdx;
 
 	public RequestReg() {
 	}
 
+	
+
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqHelper, Timestamp reqDateTime,
 			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
-			String reqImg, double distance, int calDistance, List<RequestChat> chatList, int reviewStatus, String reviewWriter) {
+			String reqImg, double distance, int calDistance, List<RequestChat> chatList, int reviewStatus,
+			String reviewWriter, int revReqIdx) {
 		super();
 		this.reqIdx = reqIdx;
 		this.reqWriter = reqWriter;
@@ -54,7 +58,10 @@ public class RequestReg {
 		this.chatList = chatList;
 		this.reviewStatus = reviewStatus;
 		this.reviewWriter = reviewWriter;
+		this.revReqIdx = revReqIdx;
 	}
+
+
 
 	// 등록
 	public RequestReg(String reqWriter, String reqTitle, String reqAddr, String reqContents, String reqLatitude,
@@ -219,6 +226,20 @@ public class RequestReg {
 	public void setReviewWriter(String reviewWriter) {
 		this.reviewWriter = reviewWriter;
 	}
+	
+	
+
+	public int getRevReqIdx() {
+		return revReqIdx;
+	}
+
+
+
+	public void setRevReqIdx(int revReqIdx) {
+		this.revReqIdx = revReqIdx;
+	}
+
+
 
 	@Override
 	public String toString() {
@@ -227,8 +248,12 @@ public class RequestReg {
 				+ ", reqLatitude=" + reqLatitude + ", reqLongitude=" + reqLongitude + ", reqCount=" + reqCount
 				+ ", reqStatus=" + reqStatus + ", reqImg=" + reqImg + ", distance=" + distance + ", calDistance="
 				+ calDistance + ", chatList=" + chatList + ", reviewStatus=" + reviewStatus + ", reviewWriter="
-				+ reviewWriter + "]";
+				+ reviewWriter + ", revReqIdx=" + revReqIdx + "]";
 	}
+
+
+
+	
 
 
 

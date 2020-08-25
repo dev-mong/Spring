@@ -4,6 +4,7 @@ package com.aia.rl.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,12 +54,14 @@ public class RequestController {
 
 
 	// 요청 게시물 등록
+	@CrossOrigin
 	@PostMapping
 	public int requestReg(ReqeustRegReq requestRegReq, HttpServletRequest request) {
 		return regService.requestReg(requestRegReq, request);
 	}
 
 	// 요청 글 게시물 출력 & 검색
+	@CrossOrigin
 	@GetMapping
 	public RequestRegView requestList(
 			@RequestParam("mLat") String mLat,
@@ -73,6 +76,7 @@ public class RequestController {
 	}
 
 	// 요청 글 상세 정보 출력
+	@CrossOrigin
 	@GetMapping("/{idx}")
 	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count,
 			@RequestParam("mNick") String mNick) {
@@ -80,6 +84,7 @@ public class RequestController {
 	}
 	
 	//요청 글 수정 시 데이터 출력 리스트 
+	@CrossOrigin
 	@GetMapping("/edit/{idx}")
 	public RequestReg editDetail(@PathVariable("idx") int idx) {
 		return editDetailService.editDetail(idx);
@@ -87,6 +92,7 @@ public class RequestController {
 	
 	
 	// 요청 글 수정
+	@CrossOrigin
 	@PostMapping("/{idx}")
 	public int requestEdit(@PathVariable("idx") int reqIdx, RequestEdit edit, HttpServletRequest request) {
 		edit.setReqIdx(reqIdx);
@@ -94,12 +100,14 @@ public class RequestController {
 	}
 
 	// 요철 글 삭제
+	@CrossOrigin
 	@DeleteMapping("/{idx}")
 	public int requestDelete(@PathVariable("idx") int idx, HttpServletRequest request) {
 		return deleteService.reqeustDelete(idx, request);
 	}
 
 	// 요청글 상태 정보 변경  - 매칭 취소 시 
+	@CrossOrigin
 	@PutMapping("/{idx}")
 	public int reqestStatusEdit(@PathVariable("idx") int idx) {
 		return statusService.requestStatusEdit(idx);

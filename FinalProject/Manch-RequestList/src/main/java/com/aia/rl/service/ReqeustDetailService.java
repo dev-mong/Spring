@@ -1,6 +1,7 @@
 package com.aia.rl.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -38,21 +39,27 @@ public class ReqeustDetailService {
 		
 		int status = 0;
 		String writer = null;
+		int reqIdx = 0;
+		
 		
 		for(int i=0;i<review.size();i++) {
 			
+		//요청글 리스트와 리뷰에 요청글 리스트가 같을 때 리뷰 작성 가능한 사람들을 뽑는다	
+		if(review.get(i).getReqIdx() == idx) {	
 			//로그인 한 사용자가 글쓴이 일 때 
-			if(mNick.equals(review.get(i).getWriter())) {
-				
-				status = review.get(i).getStatus();
-				writer = review.get(i).getWriter();
-				reg.setReviewStatus(status);
-				reg.setReviewWriter(writer);
-			}
+				if(mNick.equals(review.get(i).getWriter())) {
+					
+					reqIdx = review.get(i).getReqIdx(); //요청글 번호
+					status = review.get(i).getStatus();
+					writer = review.get(i).getWriter();
+					
+					reg.setReviewStatus(status);
+					reg.setReviewWriter(writer);
+					reg.setRevReqIdx(reqIdx);
+				}
+			
+			}	
 		}
-		
-		
-		
 		
 		return reg;
 	}

@@ -19,12 +19,6 @@ public class Review {
 	public Review() {
 	}
 
-	public Review(int reviewIdx, String receiver, String writer, int status) {
-		this.reviewIdx = reviewIdx;
-		this.receiver = receiver;
-		this.writer = writer;
-		this.status = status;
-	}
 
 	public Review(int reviewIdx, int reqIdx, String receiver, String writer, String text, int avg, int status,
 			List<RequestReg> reqList) {
@@ -37,6 +31,25 @@ public class Review {
 		this.status = status;
 		this.reqList = reqList;
 	}
+
+	//매칭 상대 등록 시 리뷰 등록
+	
+	
+	//리뷰 작성 시 업데이트
+	public Review(int reviewIdx, String receiver, String writer, int status) {
+		this.reviewIdx = reviewIdx;
+		this.receiver = receiver;
+		this.writer = writer;
+		this.status = status;
+	}
+
+	public Review(String receiver,int reqIdx,String writer, int status) {
+		this.reqIdx = reqIdx;
+		this.receiver = receiver;
+		this.writer = writer;
+		this.status = status;
+	}
+
 
 	public int getReviewIdx() {
 		return reviewIdx;

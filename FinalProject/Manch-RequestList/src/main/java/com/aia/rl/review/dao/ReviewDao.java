@@ -37,7 +37,11 @@ public interface ReviewDao {
 	//리뷰 상태 등록
 	public int insertStatus(Review review);
 	
+	//게시글 삭제 시 리뷰 여부
+	public List<Review> selectReqReview(int idx);
 
+	//받은 리뷰 수
+	public int receiveView(String mNick);
 
 	
 
