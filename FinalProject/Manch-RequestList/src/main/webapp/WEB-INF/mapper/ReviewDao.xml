@@ -65,9 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원이 작성한 리뷰 -->
 	<select id="reviewList" resultMap="review">
-		select request_title,review_receiver,review_writer,review_text,review_status
+		select request_title,review_idx,review_receiver,review_writer,review_text,review_status
 		from Mangchi.review as w join Mangchi.request_list as r 
-		on r.request_idx=w.request_idx and w.review_writer=#{mNick} and w.review_status=1
+		on r.request_idx=w.request_idx and w.review_writer=#{mNick} 
+		<!-- and w.review_status=1 -->
 		limit #{startRow}, #{count}
 	</select>
 	

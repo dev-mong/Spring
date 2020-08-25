@@ -22,7 +22,7 @@ public class ReviewListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public ReviewView reviewAvg(String mNick,int page) {
+	public ReviewView reviewMyPage(String mNick,int page) {
 	
 		dao = template.getMapper(ReviewDao.class);
 		
@@ -38,8 +38,6 @@ public class ReviewListService {
 		map.put("count", REQUEST_COUNT_PAGE);
 		
 		List<Review> list = dao.reviewList(map); // 로그인 한 사용자 가 작성한 전체 리뷰 
-		
-		
 		
 		int regCheck = dao.receiveView(mNick);
 		int avg = 0;

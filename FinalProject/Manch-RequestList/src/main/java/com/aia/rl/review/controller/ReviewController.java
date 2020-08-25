@@ -49,7 +49,7 @@ public class ReviewController {
 	@CrossOrigin
 	@GetMapping("/{mNick}")
 	public ReviewView reviewList(@PathVariable("mNick") String mNick, @RequestParam("page") int page) {
-		return listService.reviewAvg(mNick, page);
+		return listService.reviewMyPage(mNick, page);
 	}
 
 }
