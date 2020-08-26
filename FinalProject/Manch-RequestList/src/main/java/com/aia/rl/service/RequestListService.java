@@ -27,7 +27,7 @@ public class RequestListService {
 
 		dao = template.getMapper(RequestDao.class);
 
-		final int REQUEST_COUNT_PAGE = 4; // 한 페이지 당 표현 할 리스트 수
+		final int REQUEST_COUNT_PAGE = 10; // 한 페이지 당 표현 할 리스트 수
 		int listTotalCnt = 0; // 전체 리스트 개수
 		int currentPageNum = page; // 현재 페이지
 		int startRow = (currentPageNum - 1) * REQUEST_COUNT_PAGE; // 시작 행
