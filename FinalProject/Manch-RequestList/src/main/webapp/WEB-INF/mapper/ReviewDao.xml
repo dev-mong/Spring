@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 평점을 계산 해서 출력-->
-	<select id="selectReg" resultType="int">
+	<select id="selectAvg" resultType="int">
 		select avg(review_avg)  from Mangchi.review where review_receiver=#{mNick} and review_status=1;
 	</select>
 	
@@ -87,6 +87,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectReqReview" resultMap="review">
 		select * from Mangchi.review where request_idx=#{idx}
 	</select>
+
+
+
+	<!-- 회원 리뷰 등록하기 -->
+	<update id="updateMember" parameterType="map">
+		update Mangchi.member set member_score=#{avg} where member_nick=#{receiver}
+	</update>
+
+
 	
 	
 </mapper>

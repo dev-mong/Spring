@@ -18,7 +18,7 @@ public interface ReviewDao {
 	
 	
 	//작성 한 리뷰의 평점 출력 
-	public int selectReg(String mNick);
+	public int selectAvg(String mNick);
 
 	
 	//회원이 작성 한 리뷰 
@@ -42,6 +42,10 @@ public interface ReviewDao {
 
 	//받은 리뷰 수
 	public int receiveView(String mNick);
+
+	
+	//회원 리뷰 평점 등록하기
+	public int updateMember(Map<String, Object> member);
 
 	
 

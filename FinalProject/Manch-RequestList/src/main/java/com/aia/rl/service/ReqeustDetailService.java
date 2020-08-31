@@ -23,7 +23,7 @@ public class ReqeustDetailService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestReg requestDetail(int idx,int count, String mNick) {
+	public RequestReg requestDetail(int idx,int count, String mNick, String reqWriter) {
 		
 		dao = template.getMapper(RequestDao.class);
 		rdao = template.getMapper(ReviewDao.class);
@@ -36,11 +36,9 @@ public class ReqeustDetailService {
 
 		List<Review> review = rdao.selectReqIdx(idx);
 		
-		
 		int status = 0;
 		String writer = null;
 		int reqIdx = 0;
-		
 		
 		for(int i=0;i<review.size();i++) {
 			
@@ -60,6 +58,15 @@ public class ReqeustDetailService {
 			
 			}	
 		}
+		
+		
+		int regCheck = rdao.receiveView(reqWriter);
+		int avg = 0;
+		if(regCheck > 0) {
+			avg = rdao.selectAvg(reqWriter); //회원 평점
+			reg.setAvg(avg);
+		}
+		
 		
 		return reg;
 	}

@@ -25,16 +25,15 @@ public class RequestReg {
 	private int calDistance; // 계산 된 거리
 
 	private List<RequestChat> chatList; // 채팅 목록
-	
-	
+
 	private int reviewStatus; // 리뷰 작성 여부 확인
 	private String reviewWriter; // 리뷰 글쓴이
 	private int revReqIdx;
 
+	private int avg; // 글쓴이 평점
+
 	public RequestReg() {
 	}
-
-	
 
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqHelper, Timestamp reqDateTime,
 			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
@@ -60,8 +59,6 @@ public class RequestReg {
 		this.reviewWriter = reviewWriter;
 		this.revReqIdx = revReqIdx;
 	}
-
-
 
 	// 등록
 	public RequestReg(String reqWriter, String reqTitle, String reqAddr, String reqContents, String reqLatitude,
@@ -218,7 +215,6 @@ public class RequestReg {
 		this.reviewStatus = reviewStatus;
 	}
 
-
 	public String getReviewWriter() {
 		return reviewWriter;
 	}
@@ -226,20 +222,22 @@ public class RequestReg {
 	public void setReviewWriter(String reviewWriter) {
 		this.reviewWriter = reviewWriter;
 	}
-	
-	
 
 	public int getRevReqIdx() {
 		return revReqIdx;
 	}
 
-
-
 	public void setRevReqIdx(int revReqIdx) {
 		this.revReqIdx = revReqIdx;
 	}
 
+	public int getAvg() {
+		return avg;
+	}
 
+	public void setAvg(int avg) {
+		this.avg = avg;
+	}
 
 	@Override
 	public String toString() {
@@ -250,11 +248,5 @@ public class RequestReg {
 				+ calDistance + ", chatList=" + chatList + ", reviewStatus=" + reviewStatus + ", reviewWriter="
 				+ reviewWriter + ", revReqIdx=" + revReqIdx + "]";
 	}
-
-
-
-	
-
-
 
 }

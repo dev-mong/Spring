@@ -79,8 +79,9 @@ public class RequestController {
 	@CrossOrigin
 	@GetMapping("/{idx}")
 	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count,
-			@RequestParam("mNick") String mNick) {
-		return detailService.requestDetail(idx, count,mNick);
+			@RequestParam("mNick") String mNick,
+			@RequestParam("writer") String writer) {
+		return detailService.requestDetail(idx, count,mNick,writer);
 	}
 	
 	//요청 글 수정 시 데이터 출력 리스트 

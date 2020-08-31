@@ -1,5 +1,8 @@
 package com.aia.rl.review.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ public class ReviewRegServcie {
 	
 	private ReviewDao dao;
 	
+	
 	@Autowired
 	private SqlSessionTemplate template;
 
@@ -19,9 +23,19 @@ public class ReviewRegServcie {
 		
 		dao=template.getMapper(ReviewDao.class);
 		
+		
 		review.setStatus(1);
 		
 		int result = dao.updateReview(review);
+		
+		
+		//업데이트 할 리뷰의 평점 출력
+		int avg= dao.selectAvg(review.getReceiver());
+		//회원 리뷰 평점 등록
+		Map<String, Object> member = new HashMap<String, Object>();
+		member.put("receiver", review.getReceiver());
+		member.put("avg", avg);
+		dao.updateMember(member);
 		
 		return result;
 	}

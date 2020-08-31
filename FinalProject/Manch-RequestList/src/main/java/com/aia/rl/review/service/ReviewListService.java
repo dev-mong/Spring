@@ -42,7 +42,7 @@ public class ReviewListService {
 		int regCheck = dao.receiveView(mNick);
 		int avg = 0;
 		if(regCheck > 0) {
-			avg = dao.selectReg(mNick); //회원 평점
+			avg = dao.selectAvg(mNick); //회원 평점
 		}
 		
 		
