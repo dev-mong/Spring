@@ -1,7 +1,7 @@
 package com.aia.rl.review.model;
 
-import java.util.List;
 
+import com.aia.rl.member.model.Member;
 import com.aia.rl.model.RequestReg;
 
 public class Review {
@@ -14,14 +14,24 @@ public class Review {
 	private int avg;
 	private int status;
 
-	private List<RequestReg> reqList;
+	private RequestReg reqList;
+
+	private Member member;
 
 	public Review() {
 	}
 
+	/*
+	 * public Review(int reviewIdx, int reqIdx, String receiver, String writer,
+	 * String text, int avg, int status, List<RequestReg> reqList) { this.reviewIdx
+	 * = reviewIdx; this.reqIdx = reqIdx; this.receiver = receiver; this.writer =
+	 * writer; this.text = text; this.avg = avg; this.status = status; this.reqList
+	 * = reqList; }
+	 */
 
 	public Review(int reviewIdx, int reqIdx, String receiver, String writer, String text, int avg, int status,
-			List<RequestReg> reqList) {
+			RequestReg reqList, Member member) {
+		super();
 		this.reviewIdx = reviewIdx;
 		this.reqIdx = reqIdx;
 		this.receiver = receiver;
@@ -30,12 +40,10 @@ public class Review {
 		this.avg = avg;
 		this.status = status;
 		this.reqList = reqList;
+		this.member = member;
 	}
 
-	//매칭 상대 등록 시 리뷰 등록
-	
-	
-	//리뷰 작성 시 업데이트
+	// 리뷰 작성 시 업데이트
 	public Review(int reviewIdx, String receiver, String writer, int status) {
 		this.reviewIdx = reviewIdx;
 		this.receiver = receiver;
@@ -43,13 +51,12 @@ public class Review {
 		this.status = status;
 	}
 
-	public Review(String receiver,int reqIdx,String writer, int status) {
+	public Review(String receiver, int reqIdx, String writer, int status) {
 		this.reqIdx = reqIdx;
 		this.receiver = receiver;
 		this.writer = writer;
 		this.status = status;
 	}
-
 
 	public int getReviewIdx() {
 		return reviewIdx;
@@ -107,18 +114,27 @@ public class Review {
 		this.status = status;
 	}
 
-	public List<RequestReg> getReqList() {
+	public RequestReg getReqList() {
 		return reqList;
 	}
 
-	public void setReqList(List<RequestReg> reqList) {
+	public void setReqList(RequestReg reqList) {
 		this.reqList = reqList;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	@Override
 	public String toString() {
 		return "Review [reviewIdx=" + reviewIdx + ", reqIdx=" + reqIdx + ", receiver=" + receiver + ", writer=" + writer
-				+ ", text=" + text + ", avg=" + avg + ", status=" + status + ", reqList=" + reqList + "]";
+				+ ", text=" + text + ", avg=" + avg + ", status=" + status + ", reqList=" + reqList + ", member="
+				+ member + "]";
 	}
 
 }

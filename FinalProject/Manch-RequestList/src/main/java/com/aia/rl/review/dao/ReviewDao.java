@@ -4,6 +4,8 @@ package com.aia.rl.review.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.aia.rl.review.model.Review;
 
 public interface ReviewDao {
@@ -13,7 +15,7 @@ public interface ReviewDao {
 
 	
 	//상대방이 여러명일 때 리뷰 상대방 선택 
-	public List<Review> selectReceiver(String reviewWriter);
+	public List<Review> selectReceiver(@Param("reviewWriter")String reviewWriter,@Param("reqIdx") int reqIdx);
 	 
 	
 	
@@ -21,7 +23,7 @@ public interface ReviewDao {
 	public int selectAvg(String mNick);
 
 	
-	//회원이 작성 한 리뷰 
+	//회원이 작성 한 리뷰 - 마이페이지 
 	public List<Review> reviewList(Map<String, Object> map);
 	
 	

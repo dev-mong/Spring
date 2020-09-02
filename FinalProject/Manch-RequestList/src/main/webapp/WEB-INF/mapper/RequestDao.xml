@@ -29,8 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="helper" column="member1"/>
 		<result property="writer" column="member2"/>
 		<result property="requestIdx" column="request_idx"/>
-		<collection property="reqList" resultMap="requestList" />
+		
+		<result property="mImg" column="member_img"/>
+		<result property="avg" column="member_score"/>
+		
 	</resultMap>
+	
+	
 	
 	<!-- 게시글 등록 -->
 	<insert id="insertRequest"
@@ -246,8 +251,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 채팅 상대 선택 : 게시글 번호, member1(헬퍼), member (글쓴이) -->
 	<select id="selectChatRoom" parameterType="int" resultMap="chat">
-		select room_idx,member1,member2 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
-	</select>
+		<!-- select room_idx,member1,member2 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
+ -->
+ 	
+ 	select member1,member2,mb.member_img,mb.member_score FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx 
+	left join Mangchi.member as mb on mb.member_nick = m.member1 where r.request_idx=#{idx}
+ 	</select>
 	
 	
 	<!-- 수행자 등록 -->

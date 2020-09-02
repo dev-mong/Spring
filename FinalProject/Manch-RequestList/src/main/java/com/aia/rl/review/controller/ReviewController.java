@@ -40,8 +40,9 @@ public class ReviewController {
 	// 리뷰 상대방 선택 
 	@CrossOrigin
 	@PostMapping("/{reviewWriter}")
-	public List<Review> nickCheck(@PathVariable("reviewWriter") String reviewWriter) {
-		return checkServie.selectReceiver(reviewWriter);
+	public List<Review> nickCheck(@PathVariable("reviewWriter") String reviewWriter,
+			@RequestParam("reqIdx") int reqIdx) {
+		return checkServie.selectReceiver(reviewWriter,reqIdx);
 
 	}
 

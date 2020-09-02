@@ -1,28 +1,31 @@
 package com.aia.rl.model;
 
-import java.util.List;
+
 
 public class RequestChat {
-	
+
 	private int chatIdx;
 	private String chatName;
 	private int requestIdx;
 	private String helper;
 	private String writer;
 	
-	private List<RequestReg> reqList;
+	//멤버
+	private String mImg;
+	private int avg;
 
 	public RequestChat() {
 	}
 
-	public RequestChat(int chatIdx, String chatName, int requestIdx, String helper, String writer,
-			List<RequestReg> reqList) {
+	public RequestChat(int chatIdx, String chatName, int requestIdx, String helper, String writer, String mImg,
+			int avg) {
 		this.chatIdx = chatIdx;
 		this.chatName = chatName;
 		this.requestIdx = requestIdx;
 		this.helper = helper;
 		this.writer = writer;
-		this.reqList = reqList;
+		this.mImg = mImg;
+		this.avg = avg;
 	}
 
 	public int getChatIdx() {
@@ -65,16 +68,32 @@ public class RequestChat {
 		this.writer = writer;
 	}
 
-	public List<RequestReg> getRegList() {
-		return reqList;
+	public String getmImg() {
+		return mImg;
 	}
 
-	public void setRegList(List<RequestReg> reqList) {
-		this.reqList = reqList;
+	public void setmImg(String mImg) {
+		this.mImg = mImg;
 	}
+
+	public int getAvg() {
+		return avg;
+	}
+
+	public void setAvg(int avg) {
+		this.avg = avg;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestChat [chatIdx=" + chatIdx + ", chatName=" + chatName + ", requestIdx=" + requestIdx + ", helper="
+				+ helper + ", writer=" + writer + ", mImg=" + mImg + ", avg=" + avg + "]";
+	}
+
 	
 	
 	
 	
 	
+
 }

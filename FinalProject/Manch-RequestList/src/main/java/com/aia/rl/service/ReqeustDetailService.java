@@ -59,7 +59,6 @@ public class ReqeustDetailService {
 			}	
 		}
 		
-		
 		int regCheck = rdao.receiveView(reqWriter);
 		int avg = 0;
 		if(regCheck > 0) {

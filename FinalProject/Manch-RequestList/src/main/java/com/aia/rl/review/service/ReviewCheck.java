@@ -20,11 +20,13 @@ public class ReviewCheck {
 	private SqlSessionTemplate template;
 	
 	//리뷰를 작성할 상대방 선택 
-	public List<Review> selectReceiver(String reviewWriter) {
+	public List<Review> selectReceiver(String reviewWriter, int reqIdx) {
 	
 		dao = template.getMapper(ReviewDao.class);
 		
-		List<Review> review = dao.selectReceiver(reviewWriter);
+		List<Review> review = dao.selectReceiver(reviewWriter,reqIdx);
+		
+		System.out.println("리뷰 상대 선택 : "+ review +"\n");
 		
 		return review;
 	}
