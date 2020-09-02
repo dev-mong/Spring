@@ -250,13 +250,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 채팅 상대 선택 : 게시글 번호, member1(헬퍼), member (글쓴이) -->
-	<select id="selectChatRoom" parameterType="int" resultMap="chat">
+	<select id="selectChatRoom" parameterType="map" resultMap="chat">
 		<!-- select room_idx,member1,member2 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
  -->
- 	
  	select member1,member2,mb.member_img,mb.member_score FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx 
-	left join Mangchi.member as mb on mb.member_nick = m.member1 where r.request_idx=#{idx}
+	left join Mangchi.member as mb on mb.member_nick = m.member1 where r.request_idx=#{idx} limit #{startRow},#{count}
  	</select>
+	
+	
+	<!-- 전체 채팅 리스트 수 -->
+	<select id="totalChat" resultType="int">
+		select count(*) from Mangchi.chat_room where request_idx=#{idx};
+	</select>
+	
+	
+	
 	
 	
 	<!-- 수행자 등록 -->

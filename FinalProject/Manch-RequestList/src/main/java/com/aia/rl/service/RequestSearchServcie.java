@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
-import com.aia.rl.model.RequestRegView;
+import com.aia.rl.model.RequestView;
 
 @Service
 public class RequestSearchServcie {
@@ -21,7 +21,7 @@ public class RequestSearchServcie {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestRegView requestSearch(String search,String type,int page) {
+	public RequestView requestSearch(String search,String type,int page) {
 		
 		dao=template.getMapper(RequestDao.class);
 		
@@ -41,7 +41,7 @@ public class RequestSearchServcie {
 		
 		int startRow=0;
 		List<RequestReg> requestReg = null; // 요청 리스트 
-		RequestRegView  requestRegView = null; // 요청 리스트 
+		RequestView  requestRegView = null; // 요청 리스트 
 		
 		if (listTotalCnt > 0) {
 			startRow = (currentPageNum - 1) * REQUEST_COUNT_PAGE; // 시작 행 
@@ -62,7 +62,7 @@ public class RequestSearchServcie {
 		}
 		
 
-		requestRegView = new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, requestReg, startRow);
+		requestRegView = new RequestView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, requestReg, startRow);
 
 		
 		

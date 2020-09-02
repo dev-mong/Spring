@@ -1,7 +1,5 @@
 package com.aia.rl.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aia.rl.model.RequestChat;
+import com.aia.rl.model.RequestView;
 import com.aia.rl.service.RequestChatCompleteService;
 import com.aia.rl.service.ReuqestHelperRegService;
 
@@ -27,8 +25,9 @@ public class RequestChatController {
 	// 매칭 상대 선택
 	@CrossOrigin
 	@GetMapping("/complete/{idx}")
-	public List<RequestChat> chatComplete(@PathVariable("idx") int idx) {
-		return completeService.cahtComplete(idx);
+	public RequestView chatComplete(@PathVariable("idx") int idx,
+			@RequestParam("page") int page) {
+		return completeService.cahtComplete(idx,page);
 	}
 	
 	// 헬퍼 등록

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aia.rl.model.RequestRegView;
+import com.aia.rl.model.RequestView;
 import com.aia.rl.mypage.service.MyListService;
 
 @RestController
@@ -22,7 +22,7 @@ public class MypageRequestController {
 	//요청 글 리스트 타입 별로 출력  .. 
 	@CrossOrigin
 	@GetMapping("/{mNick}")
-	public RequestRegView myList(@PathVariable("mNick") String mNick, 
+	public RequestView myList(@PathVariable("mNick") String mNick, 
 			@RequestParam ("type") String type,
 			@RequestParam("page") int page){
 		

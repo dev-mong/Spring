@@ -2,7 +2,7 @@ package com.aia.rl.model;
 
 import java.util.List;
 
-public class RequestRegView {
+public class RequestView {
 
 	// 전체 리스트 수
 	private int listTotalCnt;
@@ -18,12 +18,15 @@ public class RequestRegView {
 
 	// 출력 할 게시글 리스트 
 	private List<RequestReg> requestReg;
+	
+	//출력 할 채팅 리스트
+	private List<RequestChat> requestChat;
 
 	// 게시물의 시작 행
 	private int startRow;
 	
 
-	public RequestRegView(int listTotalCnt, int requestCountPage, int currentPageNum, List<RequestReg> requestReg,
+	public RequestView(int listTotalCnt, int requestCountPage, int currentPageNum, List<RequestReg> requestReg,
 			int startRow) {
 		this.listTotalCnt = listTotalCnt;
 		this.requestCountPage = requestCountPage;
@@ -32,6 +35,19 @@ public class RequestRegView {
 		this.startRow = startRow;
 		calTotalCount();
 	}
+	
+	
+
+	public RequestView(int listTotalCnt, int requestCountPage, int currentPageNum,
+			int startRow) {
+		this.listTotalCnt = listTotalCnt;
+		this.requestCountPage = requestCountPage;
+		this.currentPageNum = currentPageNum;
+		this.startRow = startRow;
+		calTotalCount();
+	}
+
+
 
 	// 전체 페이지를 구하는 메소드
 	private void calTotalCount() {
@@ -93,14 +109,33 @@ public class RequestRegView {
 	public void setStartRow(int startRow) {
 		this.startRow = startRow;
 	}
+	
+	
+	
+	
+
+	public List<RequestChat> getRequestChat() {
+		return requestChat;
+	}
+
+
+
+	public void setRequestChat(List<RequestChat> requestChat) {
+		this.requestChat = requestChat;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "RequestRegView [listTotalCnt=" + listTotalCnt + ", pageTotalCount=" + pageTotalCount
+		return "RequestView [listTotalCnt=" + listTotalCnt + ", pageTotalCount=" + pageTotalCount
 				+ ", requestCountPage=" + requestCountPage + ", currentPageNum=" + currentPageNum + ", requestReg="
-				+ requestReg + ", startRow=" + startRow + "]";
+				+ requestReg + ", requestChat=" + requestChat + ", startRow=" + startRow + "]";
 	}
 
+
+
+	
 	
 	
 

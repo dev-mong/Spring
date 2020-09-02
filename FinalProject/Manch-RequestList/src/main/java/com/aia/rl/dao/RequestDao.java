@@ -69,16 +69,21 @@ public interface RequestDao {
 	
 	
 	
-	//채팅 상대 선택 
-	public List<RequestChat> selectChatRoom(int idx);
+	//채팅 상대 선택 페이징 처리 후 리스트 출력
+	public List<RequestChat> selectChatRoom(Map<String, Object> map);
 
 
 	//채팅 완료 상대 등록
 	public int helperReg(Map<String, Object> helperMap);
 
+
+
 	
+	//게시글에 대한 전체 채팅 수
+	public int totalChat(int idx);
 
 
+	
 	
 	
 	

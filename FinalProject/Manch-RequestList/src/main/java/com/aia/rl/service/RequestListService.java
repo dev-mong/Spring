@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
-import com.aia.rl.model.RequestRegView;
+import com.aia.rl.model.RequestView;
 import com.aia.rl.review.dao.ReviewDao;
 
 @Service
@@ -22,7 +22,7 @@ public class RequestListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestRegView requestList(String mLat, String mLon, int mRadius, String type, int page, String searchText,
+	public RequestView requestList(String mLat, String mLon, int mRadius, String type, int page, String searchText,
 			String searchType) {
 
 		dao = template.getMapper(RequestDao.class);
@@ -97,7 +97,7 @@ public class RequestListService {
 		
 		
 		
-		RequestRegView resultView = new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, result,
+		RequestView resultView = new RequestView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, result,
 				startRow);
 
 		

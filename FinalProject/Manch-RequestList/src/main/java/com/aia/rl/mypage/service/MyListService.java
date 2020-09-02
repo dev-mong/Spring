@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aia.rl.model.RequestReg;
-import com.aia.rl.model.RequestRegView;
+import com.aia.rl.model.RequestView;
 import com.aia.rl.mypage.dao.MypageDao;
 
 @Service
@@ -20,7 +20,7 @@ public class MyListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public RequestRegView myList(String mNick, String type,int page) {
+	public RequestView myList(String mNick, String type,int page) {
 		
 		dao=template.getMapper(MypageDao.class);
 		
@@ -40,7 +40,7 @@ public class MyListService {
 
 		listTotalCnt = dao.allTotalCount(mNick,type);
 		
-		RequestRegView resultView = new RequestRegView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, result,
+		RequestView resultView = new RequestView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, result,
 				startRow);
 
 		

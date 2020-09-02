@@ -14,9 +14,12 @@ public interface ReviewDao {
 	public int updateReview(Review review);
 
 	
-	//상대방이 여러명일 때 리뷰 상대방 선택 
-	public List<Review> selectReceiver(@Param("reviewWriter")String reviewWriter,@Param("reqIdx") int reqIdx);
+	//리뷰 상대 선택 시 전체 리스트 수 
+	public int receiverTotal(@Param("reviewWriter")String reviewWriter,@Param("reqIdx") int reqIdx);
 	 
+	
+	//상대방이 여러명일 때 리뷰 상대방 선택 
+	public List<Review> selectReceiver(Map<String, Object> map);
 	
 	
 	//작성 한 리뷰의 평점 출력 
@@ -48,6 +51,9 @@ public interface ReviewDao {
 	
 	//회원 리뷰 평점 등록하기
 	public int updateMember(Map<String, Object> member);
+
+
+
 
 	
 

@@ -23,9 +23,20 @@ public class ReviewView {
 		// 게시물의 시작 행
 		private int startRow;
 		
+		
 		private int avg;
 		
 
+		//대화 상대 선택시 필요한 생성자
+		public ReviewView(int listTotalCnt, int requestCountPage, int currentPageNum, List<Review> reviewList,
+				int startRow) {
+			this.listTotalCnt = listTotalCnt;
+			this.requestCountPage = requestCountPage;
+			this.currentPageNum = currentPageNum;
+			this.reviewList = reviewList;
+			this.startRow = startRow;
+			calTotalCount();
+		}
 
 		public ReviewView(int listTotalCnt, int requestCountPage, int currentPageNum, List<Review> reviewList,
 				int startRow, int avg) {

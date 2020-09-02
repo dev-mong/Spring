@@ -74,12 +74,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	<!-- 리뷰 쓸 사람 선택 -->
 <!-- 	<select id="selectReceiver" resultMap="review"> -->
 	<select id="selectReceiver" resultMap="reviewMember">
 		<!-- select * from Mangchi.review where review_writer=#{reviewWriter}  -->
-		select r.review_receiver,m.member_Img,m.member_score from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx};
+		select r.review_receiver,m.member_Img,m.member_score from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx} limit #{startRow},#{count};
 		
 	</select>
+	
+	
+	<select id="receiverTotal" resultType="int">
+		<!-- select * from Mangchi.review where review_writer=#{reviewWriter}  -->
+		select count(*) from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx};
+		
+	</select>
+	
+	
+	
 	
 	<!-- 평점을 계산 해서 출력-->
 	<select id="selectAvg" resultType="int">
@@ -110,7 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectReqIdx" resultMap="review">
 		select * from Mangchi.review where request_idx=#{idx}
 	</select>
-	
+	<!-- 게시글 삭제  -->
 	<select id="selectReqReview" resultMap="review">
 		select * from Mangchi.review where request_idx=#{idx}
 	</select>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aia.rl.model.ReqeustRegReq;
 import com.aia.rl.model.RequestEdit;
 import com.aia.rl.model.RequestReg;
-import com.aia.rl.model.RequestRegView;
+import com.aia.rl.model.RequestView;
 import com.aia.rl.service.ReqeustDeleteService;
 import com.aia.rl.service.ReqeustDetailService;
 import com.aia.rl.service.ReqeustEditService;
@@ -63,7 +63,7 @@ public class RequestController {
 	// 요청 글 게시물 출력 & 검색
 	@CrossOrigin
 	@GetMapping
-	public RequestRegView requestList(
+	public RequestView requestList(
 			@RequestParam("mLat") String mLat,
 			@RequestParam("mLon") String mLon,
 			@RequestParam("mRadius") int mRadius,
