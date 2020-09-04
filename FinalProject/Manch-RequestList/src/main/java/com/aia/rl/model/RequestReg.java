@@ -11,7 +11,8 @@ public class RequestReg {
 	private String reqWriter;
 	private String reqTitle;
 	private String reqHelper;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp reqDateTime;
 	private String reqAddr;
 	private String reqContents;
@@ -24,7 +25,7 @@ public class RequestReg {
 
 	private int calDistance; // 계산 된 거리
 
-	private List<RequestChat> chatList; // 채팅 목록
+	private RequestChat chatList; // 채팅 목록
 
 	private int reviewStatus; // 리뷰 작성 여부 확인
 	private String reviewWriter; // 리뷰 글쓴이
@@ -37,7 +38,7 @@ public class RequestReg {
 
 	public RequestReg(int reqIdx, String reqWriter, String reqTitle, String reqHelper, Timestamp reqDateTime,
 			String reqAddr, String reqContents, String reqLatitude, String reqLongitude, int reqCount, int reqStatus,
-			String reqImg, double distance, int calDistance, List<RequestChat> chatList, int reviewStatus,
+			String reqImg, double distance, int calDistance, RequestChat chatList, int reviewStatus,
 			String reviewWriter, int revReqIdx) {
 		super();
 		this.reqIdx = reqIdx;
@@ -199,11 +200,11 @@ public class RequestReg {
 		this.calDistance = calDistance;
 	}
 
-	public List<RequestChat> getChatList() {
+	public RequestChat getChatList() {
 		return chatList;
 	}
 
-	public void setChatList(List<RequestChat> chatList) {
+	public void setChatList(RequestChat chatList) {
 		this.chatList = chatList;
 	}
 

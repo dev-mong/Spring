@@ -1,10 +1,8 @@
 package com.aia.rl.model;
 
-import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class RequestEdit {
 
