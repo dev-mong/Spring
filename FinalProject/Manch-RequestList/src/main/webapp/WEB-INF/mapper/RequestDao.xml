@@ -64,6 +64,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		as distance
 		from Mangchi.request_list
 	</sql>
+	
+	
+	
+
 
 
 
@@ -136,6 +140,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		limit #{searchMap.startRow}, #{searchMap.count}
 	</select>
+	
+	
+	
+	<!-- 회원 지도 보기  -->
+	<select id="selectAllMap" parameterType="map" resultMap="requestList">
+		select request_title,request_latitude,request_longitude,
+		(6371*acos(cos(radians(#{mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{mLon}))+sin(radians(#{mLat}))*sin(radians(request_latitude))))
+		as distance
+		from Mangchi.request_list
+		<![CDATA[having distance < #{mRadius}]]>
+	</select>
+
+
+
+
+	
+	
 
 
 	<!-- 회원 리스트 전체 게시물 수 -->
@@ -148,7 +170,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) as cnt
 
 	</select>
-
 
 
 	<!-- 회원 거리 순으로 검색 출력 -->
@@ -207,12 +228,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
+	<!-- 게시글 상세보기 -->
 	<select id="selectIdx" resultMap="requestList">
 		select * from
 		Mangchi.request_list where request_idx=#{idx}
 	</select>
 
+	<!-- 게시글 수정 -->
 	<update id="editRequest"
 		parameterType="com.aia.rl.model.RequestReg">
 		update Mangchi.request_list set
@@ -225,7 +247,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where request_idx = #{reqIdx}
 	</update>
 
-
+	<!-- 게시글 삭제 -->
 	<delete id="deleteRequest">
 		delete from Mangchi.request_list where
 		request_idx=#{reqIdx}

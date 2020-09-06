@@ -77,10 +77,15 @@ public interface RequestDao {
 	public int helperReg(Map<String, Object> helperMap);
 
 
-
-	
 	//게시글에 대한 전체 채팅 수
 	public int totalChat(int idx);
+
+	
+	
+	
+	
+	//지도로 보기 게시글 출력
+	public List<RequestReg> selectAllMap(Map<String, Object> map);
 
 
 	

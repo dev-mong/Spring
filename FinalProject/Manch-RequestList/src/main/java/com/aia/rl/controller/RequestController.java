@@ -1,6 +1,8 @@
 package com.aia.rl.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import com.aia.rl.service.ReqeustDeleteService;
 import com.aia.rl.service.ReqeustDetailService;
 import com.aia.rl.service.ReqeustEditService;
 import com.aia.rl.service.RequestEditDetail;
+import com.aia.rl.service.RequestListMap;
 import com.aia.rl.service.RequestListService;
 import com.aia.rl.service.RequestRegService;
 import com.aia.rl.service.RequestStatusService;
@@ -36,6 +39,9 @@ public class RequestController {
 	@Autowired
 	private RequestListService listService;
 
+	@Autowired
+	private RequestListMap mapService;
+	
 	@Autowired
 	private ReqeustDetailService detailService;
 	
@@ -74,6 +80,21 @@ public class RequestController {
 
 		return listService.requestList(mLat, mLon, mRadius, type, page, searchText, searchType);
 	}
+	
+	
+	//요청 글 지도로 보기 출력
+	@CrossOrigin
+	@GetMapping("/map/{mRadius}")
+	public List<RequestReg> requestMap(@RequestParam("mLat") String mLat,
+			@RequestParam("mLon") String mLon,
+			@PathVariable("mRadius") int mRadius){
+		
+		
+		System.out.println(mLat);
+		System.out.println(mLon);
+		
+		return mapService.requestMap(mLat,mLon,mRadius);
+	}
 
 	// 요청 글 상세 정보 출력
 	@CrossOrigin
@@ -86,11 +107,10 @@ public class RequestController {
 	
 	//요청 글 수정 시 데이터 출력 리스트 
 	@CrossOrigin
-	@GetMapping("/edit/{idx}")
+	@PostMapping("/edit/{idx}")
 	public RequestReg editDetail(@PathVariable("idx") int idx) {
 		return editDetailService.editDetail(idx);
 	}
-	
 	
 	// 요청 글 수정
 	@CrossOrigin
