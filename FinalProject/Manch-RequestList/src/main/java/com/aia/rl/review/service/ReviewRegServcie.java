@@ -26,11 +26,15 @@ public class ReviewRegServcie {
 		
 		review.setStatus(1);
 		
+		System.out.println(review.toString());
+		
 		int result = dao.updateReview(review);
 		
+		System.out.println(result);
 		
 		//업데이트 할 리뷰의 평점 출력
 		int avg= dao.selectAvg(review.getReceiver());
+		
 		//회원 리뷰 평점 등록
 		Map<String, Object> member = new HashMap<String, Object>();
 		member.put("receiver", review.getReceiver());

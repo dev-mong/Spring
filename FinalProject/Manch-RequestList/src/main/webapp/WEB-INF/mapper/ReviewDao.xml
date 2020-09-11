@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	<select id="selectReceiver" resultMap="review"> -->
 	<select id="selectReceiver" resultMap="reviewMember">
 		<!-- select * from Mangchi.review where review_writer=#{reviewWriter}  -->
-		select r.review_receiver,m.member_Img,m.member_score from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx} limit #{startRow},#{count};
+		select r.review_idx,r.review_receiver,m.member_Img from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx} limit #{startRow},#{count};
 		
 	</select>
 	
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 평점을 계산 해서 출력-->
 	<select id="selectAvg" resultType="int">
-		select avg(review_avg)  from Mangchi.review where review_receiver=#{mNick} and review_status=1;
+		select avg(review_avg) from Mangchi.review where review_receiver=#{mNick} and review_status=1;
 	</select>
 	
 	<select id="receiveView" resultType="int">

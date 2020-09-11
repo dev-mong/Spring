@@ -42,9 +42,9 @@ public class ReviewCheck {
 		List<Review> review = dao.selectReceiver(map);
 		
 		
+		System.out.println(review.toString());
 		
 		ReviewView result = new ReviewView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, review, startRow);
-		
 		
 		
 		

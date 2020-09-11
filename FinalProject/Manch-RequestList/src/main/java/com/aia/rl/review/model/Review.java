@@ -31,7 +31,6 @@ public class Review {
 
 	public Review(int reviewIdx, int reqIdx, String receiver, String writer, String text, int avg, int status,
 			RequestReg reqList, Member member) {
-		super();
 		this.reviewIdx = reviewIdx;
 		this.reqIdx = reqIdx;
 		this.receiver = receiver;
