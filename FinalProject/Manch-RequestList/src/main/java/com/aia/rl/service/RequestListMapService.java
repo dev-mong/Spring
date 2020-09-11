@@ -12,7 +12,7 @@ import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
 
 @Service
-public class RequestListMap {
+public class RequestListMapService {
 	
 	private RequestDao dao;
 	

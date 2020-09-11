@@ -9,7 +9,7 @@ import com.aia.rl.dao.RequestDao;
 import com.aia.rl.model.RequestReg;
 
 @Service
-public class RequestEditDetail {
+public class RequestEditDetailService {
 
 	private RequestDao dao;
 
