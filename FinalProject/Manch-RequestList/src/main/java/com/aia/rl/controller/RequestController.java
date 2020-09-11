@@ -23,8 +23,8 @@ import com.aia.rl.model.RequestView;
 import com.aia.rl.service.ReqeustDeleteService;
 import com.aia.rl.service.ReqeustDetailService;
 import com.aia.rl.service.ReqeustEditService;
-import com.aia.rl.service.RequestEditDetail;
-import com.aia.rl.service.RequestListMap;
+import com.aia.rl.service.RequestEditDetailService;
+import com.aia.rl.service.RequestListMapService;
 import com.aia.rl.service.RequestListService;
 import com.aia.rl.service.RequestRegService;
 import com.aia.rl.service.RequestStatusService;
@@ -40,13 +40,13 @@ public class RequestController {
 	private RequestListService listService;
 
 	@Autowired
-	private RequestListMap mapService;
+	private RequestListMapService mapService;
 	
 	@Autowired
 	private ReqeustDetailService detailService;
 	
 	@Autowired
-	private RequestEditDetail editDetailService;
+	private RequestEditDetailService editDetailService;
 
 	@Autowired
 	private ReqeustEditService editService;
