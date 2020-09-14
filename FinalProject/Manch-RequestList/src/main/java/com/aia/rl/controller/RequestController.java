@@ -131,6 +131,8 @@ public class RequestController {
 	@CrossOrigin
 	@PutMapping("/{idx}")
 	public int reqestStatusEdit(@PathVariable("idx") int idx) {
+		
+		
 		return statusService.requestStatusEdit(idx);
 	}
 

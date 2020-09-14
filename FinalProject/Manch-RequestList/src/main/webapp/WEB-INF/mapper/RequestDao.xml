@@ -145,7 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원 지도 보기  -->
 	<select id="selectAllMap" parameterType="map" resultMap="requestList">
-		select request_title,request_latitude,request_longitude,request_addr,
+		select *,
 		(6371*acos(cos(radians(#{mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
 		-radians(#{mLon}))+sin(radians(#{mLat}))*sin(radians(request_latitude))))
 		as distance

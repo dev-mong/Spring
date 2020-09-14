@@ -94,12 +94,9 @@ public class RequestListService {
 			result.get(i).setCalDistance(calDistance);
 		}
 		
-		
-		
-		
+
 		RequestView resultView = new RequestView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, result,
 				startRow);
-
 		
 		
 		return resultView;

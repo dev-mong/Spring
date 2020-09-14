@@ -25,6 +25,9 @@ public class RequestListMapService {
 		
 		dao=template.getMapper(RequestDao.class);
 		
+		// 출력 할 리스트
+		List<RequestReg> result = null;
+		
 		// 회원 위도 경도 정보
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (mLat != null && !mLat.isEmpty()) {
@@ -35,12 +38,12 @@ public class RequestListMapService {
 		}
 		map.put("mRadius", mRadius);
 		
-		List<RequestReg> result = dao.selectAllMap(map);
+		result = dao.selectAllMap(map);
 		
 		for(int i=0;i<result.size();i++) {
 			double distance = result.get(i).getDistance();
-			double test = Math.round(distance*100);
-			int calDistance = (int)(test) * 10;
+			double roundDis = Math.round(distance*100);
+			int calDistance = (int)(roundDis) * 10;
 			result.get(i).setCalDistance(calDistance);
 		}
 		

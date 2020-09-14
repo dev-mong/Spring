@@ -22,6 +22,7 @@ public class RequestStatusService {
 		
 		int reqStatus = 0;
 		
+		
 		return dao.statusEdit(idx,reqStatus);
 	}
 
