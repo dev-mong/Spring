@@ -1,7 +1,7 @@
 package com.aia.rl.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,7 +12,7 @@ public class RequestReg {
 	private String reqTitle;
 	private String reqHelper;
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
-	@JsonFormat(pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yyyy.MM.dd HH:mm")
 	private Timestamp reqDateTime;
 	private String reqAddr;
 	private String reqContents;
