@@ -91,11 +91,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="totalCount" resultType="int" parameterType="map">
 		select count(*) from Mangchi.request_list
 		<where>
-			<if test="type != null">
-				<if test="type == 'title'">
+			<if test="searchType != null">
+				<if test="searchType == 'both'">
+					<include refid="wheretitle" />
+					<include refid="whereName" />
+				</if>
+				<if test="searchType == 'title'">
 					<include refid="wheretitle" />
 				</if>
-				<if test="type == 'name'">
+				<if test="searchType == 'name'">
 					<include refid="whereName" />
 				</if>
 			</if>
@@ -108,15 +112,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		select * from Mangchi.request_list
 		<where>
-			<if test="type != null">
-				<if test="type == 'title'">
+			<if test="searchType != null">
+				<if test="searchType == 'both'">
+					<include refid="wheretitle" />
+					<include refid="whereName" />
+				</if>
+				<if test="searchType == 'title'">
 					<include refid="wheretitle" />
 				</if>
-				<if test="type == 'name'">
+				<if test="searchType == 'name'">
 					<include refid="whereName" />
 				</if>
 			</if>
 		</where>
+		order by request_date desc
 		limit #{startRow}, #{count}
 	</select>
 
@@ -125,6 +134,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원 -->
 
+	<!-- 회원 지도 보기  -->
+	<select id="selectAllMap" parameterType="map" resultMap="requestList">
+		select *,
+		(6371*acos(cos(radians(#{mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
+		-radians(#{mLon}))+sin(radians(#{mLat}))*sin(radians(request_latitude))))
+		as distance
+		from Mangchi.request_list		
+		<![CDATA[having distance < #{mRadius}]]>
+	</select>
+
+
 	<!-- 회원 거리 순으로 출력 -->
 	<select id="loginDistanceAll" parameterType="map"
 		resultMap="requestList">
@@ -132,7 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[having distance < #{distanceMap.mRadius}]]>
 		<if test="distanceMap.type != null">
 			<if test="distanceMap.type == 'date'">
-				order by request_date
+				order by request_date desc
 			</if>
 			<if test="distanceMap.type == 'distance'">
 				order by distance
@@ -140,25 +160,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		limit #{searchMap.startRow}, #{searchMap.count}
 	</select>
-	
-	
-	
-	<!-- 회원 지도 보기  -->
-	<select id="selectAllMap" parameterType="map" resultMap="requestList">
-		select *,
-		(6371*acos(cos(radians(#{mLat}))*cos(radians(request_latitude))*cos(radians(request_longitude)
-		-radians(#{mLon}))+sin(radians(#{mLat}))*sin(radians(request_latitude))))
-		as distance
-		from Mangchi.request_list
-		<![CDATA[having distance < #{mRadius}]]>
-	</select>
-
-
-
 
 	
-	
-
 
 	<!-- 회원 리스트 전체 게시물 수 -->
 	<select id="loginTotalCount" parameterType="map"
@@ -178,11 +181,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		<include refid="distance" />
 		<where>
-			<if test="searchMap.type != null">
-				<if test="searchMap.type == 'title'">
+			<if test="searchMap.searchType != null">
+				
+				<if test="searchMap.searchType == 'both'">
+					or request_title like concat('%',#{searchMap.search},'%')
+					or request_writer like concat('%',#{searchMap.search},'%')
+				</if>
+			
+				<if test="searchMap.searchType == 'title'">
 					or request_title like concat('%',#{searchMap.search},'%')
 				</if>
-				<if test="searchMap.type == 'name'">
+				<if test="searchMap.searchType == 'name'">
 					or request_writer like concat('%',#{searchMap.search},'%')
 				</if>
 			</if>
@@ -192,10 +201,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		<if test="distanceMap.type != null">
 			<if test="distanceMap.type == 'date'">
-				order by distance
+				order by request_date desc
 			</if>
 			<if test="distanceMap.type == 'distance'">
-				order by request_date
+				order by distance
 			</if>
 		</if>
 		limit #{searchMap.startRow}, #{searchMap.count}
@@ -208,11 +217,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) cnt from (
 		<include refid="distance" />
 		<where>
-			<if test="searchMap.type != null">
-				<if test="searchMap.type == 'title'">
+			<if test="searchMap.searchType != null">
+				<if test="searchMap.searchType == 'both'">
+					or request_title like concat('%',#{searchMap.search},'%')
+					or request_writer like concat('%',#{searchMap.search},'%')
+				</if>
+				<if test="searchMap.searchType == 'title'">
 					or request_title like concat('%',#{searchMap.search},'%')
 				</if>
-				<if test="searchMap.type == 'name'">
+				<if test="searchMap.searchType == 'name'">
 					or request_writer like concat('%',#{searchMap.search},'%')
 				</if>
 			</if>
@@ -271,12 +284,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	
-	<!-- 채팅 상대 선택 : 게시글 번호, member1(헬퍼), member (글쓴이) -->
+	<!-- 채팅 상대 선택 : 게시글 번호, member1(헬퍼), member2 (글쓴이) -->
 	<select id="selectChatRoom" parameterType="map" resultMap="chat">
 		<!-- select room_idx,member1,member2 FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx where r.request_idx=#{idx}
  -->
  	select member1,member2,mb.member_img,mb.member_score FROM Mangchi.request_list as r right join Mangchi.chat_room as m on r.request_idx= m.request_idx 
-	left join Mangchi.member as mb on mb.member_nick = m.member1 where r.request_idx=#{idx} limit #{startRow},#{count}
+	left join Mangchi.member as mb on mb.member_nick = m.member1 where r.request_idx=#{idx} and m.room_delUser is null limit #{startRow},#{count}
  	</select>
 	
 	
