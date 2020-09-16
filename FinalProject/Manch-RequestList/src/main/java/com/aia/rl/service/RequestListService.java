@@ -39,7 +39,7 @@ public class RequestListService {
 		// 검색 조건
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		if (searchType != null && !searchType.isEmpty()) {
-			searchMap.put("type", searchType);
+			searchMap.put("searchType", searchType);
 		}
 		if (searchText != null && !searchText.isEmpty()) {
 			searchMap.put("search", searchText);
