@@ -50,8 +50,9 @@ public class ReviewController {
 	// 마이페이지 리뷰 출력
 	@CrossOrigin
 	@GetMapping("/{mNick}")
-	public ReviewView reviewList(@PathVariable("mNick") String mNick, @RequestParam("page") int page) {
-		return listService.reviewMyPage(mNick, page);
+	public ReviewView reviewList(@PathVariable("mNick") String mNick, @RequestParam("page") int page,
+			@RequestParam("status") int status) {
+		return listService.reviewMyPage(mNick, page,status);
 	}
 
 }

@@ -41,8 +41,10 @@ public class ReviewCheck {
 		
 		List<Review> review = dao.selectReceiver(map);
 		
+		for(int i=0;i<review.size();i++) {
+			System.out.println(review.get(i).getStatus());
+		}
 		
-		System.out.println(review.toString());
 		
 		ReviewView result = new ReviewView(listTotalCnt, REQUEST_COUNT_PAGE, currentPageNum, review, startRow);
 		

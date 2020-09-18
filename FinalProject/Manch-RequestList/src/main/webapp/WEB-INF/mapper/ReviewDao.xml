@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	<select id="selectReceiver" resultMap="review"> -->
 	<select id="selectReceiver" resultMap="reviewMember">
 		<!-- select * from Mangchi.review where review_writer=#{reviewWriter}  -->
-		select r.review_idx,r.review_receiver,m.member_Img from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx} limit #{startRow},#{count};
+		select r.review_idx,r.review_receiver,m.member_Img,r.review_status from Mangchi.review as r left join Mangchi.member as m on r.review_receiver = m.member_nick where r.review_writer=#{reviewWriter} and r.request_idx=#{reqIdx} limit #{startRow},#{count};
 		
 	</select>
 	
@@ -97,6 +97,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select avg(review_avg) from Mangchi.review where review_receiver=#{mNick} and review_status=1;
 	</select>
 	
+
+	
+	
 	<select id="receiveView" resultType="int">
 		select count(*) from Mangchi.review where review_receiver=#{mNick} and review_status=1;
 	</select>
@@ -105,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="reviewList" resultMap="review">
 		select request_title,review_idx,review_receiver,review_writer,review_text,review_status
 		from Mangchi.review as w join Mangchi.request_list as r 
-		on r.request_idx=w.request_idx and w.review_writer=#{mNick} 
+		on r.request_idx=w.request_idx and w.review_writer=#{mNick} and w.review_status=#{status}
 		<!-- and w.review_status=1 -->
 		limit #{startRow}, #{count}
 	</select>
@@ -113,7 +116,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원이 작성한 리뷰 전체 수  -->			
 	<select id="totalReview" resultType="int">
-		select count(*) from Mangchi.review where review_writer=#{mNick} and review_status=1
+		<!-- select count(*) from Mangchi.review where review_writer=#{mNick} and review_status=1 -->
+		select count(*) from Mangchi.review where review_writer=#{mNick} and review_status=#{status}
 	</select>
 	
 	

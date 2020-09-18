@@ -39,7 +39,10 @@ public class ReviewRegServcie {
 		Map<String, Object> member = new HashMap<String, Object>();
 		member.put("receiver", review.getReceiver());
 		member.put("avg", avg);
-		dao.updateMember(member);
+		
+		int update = dao.updateMember(member);
+		System.out.println(update);
+		
 		
 		return result;
 	}

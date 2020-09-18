@@ -32,7 +32,7 @@ public interface ReviewDao {
 	
 	
 	//리뷰 리스트 개수 
-	public int totalReview(String mNick);
+	public int totalReview(@Param ("mNick") String mNick,@Param ("status") int status);
 	
 	
 	//리뷰 작성 여부 확인 
