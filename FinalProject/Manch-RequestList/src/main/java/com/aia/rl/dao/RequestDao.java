@@ -88,6 +88,9 @@ public interface RequestDao {
 	public List<RequestReg> selectAllMap(Map<String, Object> map);
 
 
+	public String selectMemberImg(String mNick);
+
+
 	
 	
 	

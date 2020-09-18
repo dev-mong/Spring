@@ -25,7 +25,9 @@ public class RequestView {
 	// 게시물의 시작 행
 	private int startRow;
 	
-
+	private String mImg;
+	
+	
 	public RequestView(int listTotalCnt, int requestCountPage, int currentPageNum, List<RequestReg> requestReg,
 			int startRow) {
 		this.listTotalCnt = listTotalCnt;
@@ -122,6 +124,21 @@ public class RequestView {
 
 	public void setRequestChat(List<RequestChat> requestChat) {
 		this.requestChat = requestChat;
+	}
+
+	
+	
+	
+
+
+	public String getmImg() {
+		return mImg;
+	}
+
+
+
+	public void setmImg(String mImg) {
+		this.mImg = mImg;
 	}
 
 

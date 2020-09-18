@@ -311,4 +311,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
+	<!-- 회원 이지미 출력 -->
+	<select id="selectMemberImg" resultType="string">
+		select member_img from Mangchi.member where member_nick=#{mNick}
+	</select>
+	
+
+
+
 </mapper>

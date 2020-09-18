@@ -59,12 +59,23 @@ public class ReqeustDetailService {
 			}	
 		}
 		
+		
 		int regCheck = rdao.receiveView(reqWriter);
+		
 		int avg = 0;
 		if(regCheck > 0) {
 			avg = rdao.selectAvg(reqWriter); //회원 평점
 			reg.setAvg(avg);
 		}
+		
+		//회원 이미지 출력
+		String mimg = dao.selectMemberImg(reqWriter);
+		
+		reg.setmImg(mimg);
+		
+		System.out.println(mimg);
+		
+		
 		
 		
 		return reg;

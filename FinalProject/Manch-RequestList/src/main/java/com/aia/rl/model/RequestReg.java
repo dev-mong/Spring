@@ -32,7 +32,8 @@ public class RequestReg {
 	private int revReqIdx;
 
 	private int avg; // 글쓴이 평점
-
+	private String mImg; // 글쓴이 프사 
+	
 	public RequestReg() {
 	}
 
@@ -238,6 +239,17 @@ public class RequestReg {
 
 	public void setAvg(int avg) {
 		this.avg = avg;
+	}
+	
+	
+	
+
+	public String getmImg() {
+		return mImg;
+	}
+
+	public void setmImg(String mImg) {
+		this.mImg = mImg;
 	}
 
 	@Override

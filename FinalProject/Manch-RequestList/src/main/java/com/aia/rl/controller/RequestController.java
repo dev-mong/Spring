@@ -90,9 +90,6 @@ public class RequestController {
 			@PathVariable("mRadius") int mRadius){
 		
 		
-		System.out.println(mLat);
-		System.out.println(mLon);
-		
 		return mapService.requestMap(mLat,mLon,mRadius);
 	}
 
@@ -102,6 +99,8 @@ public class RequestController {
 	public RequestReg requestDetail(@PathVariable("idx") int idx, @RequestParam("count") int count,
 			@RequestParam("mNick") String mNick,
 			@RequestParam("writer") String writer) {
+		
+		
 		return detailService.requestDetail(idx, count,mNick,writer);
 	}
 	
